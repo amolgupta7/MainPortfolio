@@ -3,7 +3,7 @@ export const site = {
   wordmark: "AMOL DEEP GUPTA",
   role: "Senior Software Engineer · Full Stack",
   tagline:
-    "I build reliable, accessible, and thoughtfully engineered digital products.",
+    "Code, capture, create—living life in full frame!",
   location: "Bengaluru, India",
   timezone: "UTC+5:30 (India Standard Time)",
   email: "gupta07amol@gmail.com",
