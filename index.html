@@ -16,6 +16,30 @@
         if (stored === "light") document.documentElement.dataset.theme = "light";
       } catch (e) {}
     </script>
+    <!-- Restores the real path after 404.html's GitHub Pages SPA redirect
+         (see public/404.html) — must run before React Router mounts. -->
+    <script>
+      (function (l) {
+        if (l.search[1] === "p") {
+          var decoded = l.search
+            .slice(1)
+            .split("&")
+            .reduce(function (acc, param) {
+              var kv = param.split("=");
+              acc[kv[0]] = kv[1];
+              return acc;
+            }, {});
+          window.history.replaceState(
+            null,
+            "",
+            l.pathname.slice(0, -1) +
+              (decoded.p ? decodeURIComponent(decoded.p) : "") +
+              (decoded.q ? "?" + decodeURIComponent(decoded.q).replace(/~and~/g, "&") : "") +
+              l.hash
+          );
+        }
+      })(window.location);
+    </script>
   </head>
   <body>
     <div id="root"></div>
