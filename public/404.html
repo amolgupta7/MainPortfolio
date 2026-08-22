@@ -1,0 +1,29 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Amol Gupta | Software Engineer &amp; Photographer</title>
+    <!--
+      GitHub Pages has no server-side rewrites, so a deep link like
+      /MainPortfolio/gallery 404s on refresh/direct visit. This redirects
+      that request back to index.html with the real path encoded in the
+      query string; the script in index.html restores it via
+      history.replaceState before React Router mounts.
+      Based on https://github.com/rafgraph/spa-github-pages
+    -->
+    <script>
+      var segmentsToKeep = 1; // keep "/MainPortfolio" from the path
+      var l = window.location;
+      var path = l.pathname.split("/").slice(0, 1 + segmentsToKeep).join("/");
+      var rest = l.pathname.slice(path.length);
+      l.replace(
+        path +
+          "/?p=" +
+          encodeURIComponent(rest) +
+          (l.search ? "&q=" + encodeURIComponent(l.search.slice(1).replace(/&/g, "~and~")) : "") +
+          l.hash
+      );
+    </script>
+  </head>
+  <body></body>
+</html>
