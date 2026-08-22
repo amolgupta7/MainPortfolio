@@ -36,5 +36,9 @@ jobs:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      # Explicitly tells GitHub this repo deploys via Actions rather than the
+      # legacy branch/Jekyll pipeline — without this, Pages can keep serving
+      # the old branch-based build even when this workflow succeeds.
+      - uses: actions/configure-pages@v5
       - id: deployment
         uses: actions/deploy-pages@v4
