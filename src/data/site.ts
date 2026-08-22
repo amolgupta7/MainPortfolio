@@ -13,7 +13,10 @@ export const site = {
   githubHandle: "github.com/amolgupta7",
   linkedin: "https://linkedin.com/in/amol-deep-gupta-bb9328117",
   linkedinHandle: "in/amol-deep-gupta-bb9328117",
-  resumeUrl: "/resume.pdf",
+  // BASE_URL is "/" in dev and "/MainPortfolio/" in the production build
+  // (see vite.config.ts) — a hardcoded "/resume.pdf" would 404 once deployed
+  // under the repo subpath.
+  resumeUrl: `${import.meta.env.BASE_URL}resume.pdf`,
   copyright: "© 2026 Amol Gupta. Built with Love.",
 }
 
