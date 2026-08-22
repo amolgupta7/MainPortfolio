@@ -1,0 +1,31 @@
+export const site = {
+  name: "AMOL DEEP GUPTA",
+  wordmark: "AMOL DEEP GUPTA",
+  role: "Senior Software Engineer · Full Stack",
+  tagline:
+    "I build reliable, accessible, and thoughtfully engineered digital products.",
+  location: "Bengaluru, India",
+  timezone: "UTC+5:30 (India Standard Time)",
+  email: "gupta07amol@gmail.com",
+  phone: "+91-9340434307",
+  whatsapp: "https://wa.me/919340434307",
+  github: "https://github.com/amolgupta7",
+  githubHandle: "github.com/amolgupta7",
+  linkedin: "https://linkedin.com/in/amol-deep-gupta-bb9328117",
+  linkedinHandle: "in/amol-deep-gupta-bb9328117",
+  resumeUrl: "/resume.pdf",
+  copyright: "© 2026 Amol Gupta. Built with Love.",
+}
+
+/** Section anchors that live on the Home page. */
+export const homeNavLinks = [
+  { label: "About", hash: "about" },
+  { label: "Experience", hash: "experience" },
+  { label: "Projects", hash: "projects" },
+]
+
+/** Standalone routed pages, also shown in the primary nav. */
+export const pageNavLinks = [
+  { label: "Photography", to: "/gallery" },
+  { label: "Contact", to: "/contact" },
+]

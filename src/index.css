@@ -1,0 +1,192 @@
+/* Font @import must precede all other rules (aside from @charset/@layer). */
+@import url("https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&family=Inter:ital,opsz,wght@0,14..32,400..600;1,14..32,400..600&family=JetBrains+Mono:wght@400;500&display=swap");
+
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * Design tokens ported 1:1 from the "Technical Precision" Stitch design
+ * system (projects/2888219507447089504). Keeping the same token names as
+ * the generated Stitch markup means component className strings can be
+ * ported near-verbatim from the source designs.
+ */
+@theme {
+  /* Color roles (Material Design 3 style) */
+  --color-background: #121414;
+  --color-surface: #121414;
+  --color-surface-dim: #121414;
+  --color-surface-bright: #38393a;
+  --color-surface-container-lowest: #0c0f0f;
+  --color-surface-container-low: #1a1c1c;
+  --color-surface-container: #1e2020;
+  --color-surface-container-high: #282a2b;
+  --color-surface-container-highest: #333535;
+  --color-surface-variant: #333535;
+  --color-on-background: #e2e2e2;
+  --color-on-surface: #e2e2e2;
+  --color-on-surface-variant: #c1c6d7;
+  --color-inverse-surface: #e2e2e2;
+  --color-inverse-on-surface: #2f3131;
+
+  --color-outline: #8b90a0;
+  --color-outline-variant: #414755;
+
+  --color-primary: #adc6ff;
+  --color-on-primary: #002e69;
+  --color-primary-container: #4b8eff;
+  --color-on-primary-container: #00285c;
+  --color-primary-fixed: #d8e2ff;
+  --color-primary-fixed-dim: #adc6ff;
+  --color-on-primary-fixed: #001a41;
+  --color-on-primary-fixed-variant: #004493;
+  --color-inverse-primary: #005bc1;
+  --color-surface-tint: #adc6ff;
+
+  --color-secondary: #c8c6c5;
+  --color-on-secondary: #313030;
+  --color-secondary-container: #4a4949;
+  --color-on-secondary-container: #bab8b7;
+  --color-secondary-fixed: #e5e2e1;
+  --color-secondary-fixed-dim: #c8c6c5;
+  --color-on-secondary-fixed: #1c1b1b;
+  --color-on-secondary-fixed-variant: #474646;
+
+  --color-tertiary: #ffb595;
+  --color-on-tertiary: #571e00;
+  --color-tertiary-container: #ef6719;
+  --color-on-tertiary-container: #4c1a00;
+  --color-tertiary-fixed: #ffdbcc;
+  --color-tertiary-fixed-dim: #ffb595;
+  --color-on-tertiary-fixed: #351000;
+  --color-on-tertiary-fixed-variant: #7c2e00;
+
+  --color-error: #ffb4ab;
+  --color-on-error: #690005;
+  --color-error-container: #93000a;
+  --color-on-error-container: #ffdad6;
+
+  /* Layout spacing */
+  --spacing-base: 8px;
+  --spacing-gutter: 24px;
+  --spacing-margin-mobile: 20px;
+  --spacing-margin-desktop: 64px;
+  --spacing-container-max: 1200px;
+  --spacing-section-gap: 128px;
+
+  /* Radius (matches Stitch's generated borderRadius scale) */
+  --radius-xs: 0.125rem;
+  --radius-md: 0.25rem;
+  --radius-lg: 0.25rem;
+  --radius-xl: 0.5rem;
+  --radius-2xl: 0.75rem;
+
+  /* Font families */
+  --font-display-lg: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-display-lg-mobile: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-headline-md: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-headline-sm: "Geist", ui-sans-serif, system-ui, sans-serif;
+  --font-body-lg: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-body-md: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-label-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  /* Font sizes (paired with line-height / letter-spacing / weight) */
+  --text-display-lg: 64px;
+  --text-display-lg--line-height: 1.1;
+  --text-display-lg--letter-spacing: -0.02em;
+  --text-display-lg--font-weight: 600;
+
+  --text-display-lg-mobile: 40px;
+  --text-display-lg-mobile--line-height: 1.2;
+  --text-display-lg-mobile--letter-spacing: -0.02em;
+  --text-display-lg-mobile--font-weight: 600;
+
+  --text-headline-md: 32px;
+  --text-headline-md--line-height: 1.3;
+  --text-headline-md--letter-spacing: -0.01em;
+  --text-headline-md--font-weight: 500;
+
+  --text-headline-sm: 24px;
+  --text-headline-sm--line-height: 1.4;
+  --text-headline-sm--letter-spacing: 0em;
+  --text-headline-sm--font-weight: 500;
+
+  --text-body-lg: 18px;
+  --text-body-lg--line-height: 1.6;
+  --text-body-lg--letter-spacing: 0em;
+  --text-body-lg--font-weight: 400;
+
+  --text-body-md: 16px;
+  --text-body-md--line-height: 1.6;
+  --text-body-md--letter-spacing: 0em;
+  --text-body-md--font-weight: 400;
+
+  --text-label-mono: 13px;
+  --text-label-mono--line-height: 1.5;
+  --text-label-mono--letter-spacing: 0.05em;
+  --text-label-mono--font-weight: 500;
+
+  --animate-in: enter 0.3s ease-out;
+}
+
+@layer base {
+  * {
+    @apply border-outline-variant/30;
+  }
+  html {
+    color-scheme: dark;
+  }
+  body {
+    @apply bg-background text-on-surface font-body-md text-body-md antialiased;
+  }
+  ::selection {
+    @apply bg-primary text-on-primary;
+  }
+}
+
+@layer utilities {
+  /* Global light-mode toggle (see ThemeToggle) — flips the whole site's
+     default dark palette to light, uniformly across every page. */
+  :root[data-theme="light"] {
+    color-scheme: light;
+    --color-background: #ffffff;
+    --color-surface: #ffffff;
+    --color-surface-dim: #f2f2f3;
+    --color-surface-bright: #ffffff;
+    --color-surface-container-lowest: #f7f7f8;
+    --color-surface-container-low: #f2f2f3;
+    --color-surface-container: #ececed;
+    --color-surface-container-high: #e3e3e5;
+    --color-surface-container-highest: #d8d8db;
+    --color-surface-variant: #e3e3e5;
+    --color-on-background: #121414;
+    --color-on-surface: #121414;
+    --color-on-surface-variant: #4b4f57;
+    --color-outline: #6b7280;
+    --color-outline-variant: #d9d9dc;
+    --color-primary: #005bc1;
+    --color-on-primary: #ffffff;
+  }
+
+  /* Faint 40px technical grid overlay used behind hero/gallery sections */
+  .bg-technical-grid {
+    background-image:
+      linear-gradient(to right, rgba(139, 144, 160, 0.05) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(139, 144, 160, 0.05) 1px, transparent 1px);
+    background-size: 40px 40px;
+  }
+
+  .glass-panel {
+    background-color: color-mix(in srgb, var(--color-surface-container) 60%, transparent);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border: 1px solid color-mix(in srgb, var(--color-outline-variant) 20%, transparent);
+  }
+
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+}

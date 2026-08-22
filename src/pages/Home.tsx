@@ -1,0 +1,34 @@
+import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
+
+import { PageLayout } from "@/components/layout/PageLayout"
+import { TechnicalGrid } from "@/components/layout/TechnicalGrid"
+import { About } from "@/components/home/About"
+import { Experience } from "@/components/home/Experience"
+import { FeaturedProjects } from "@/components/home/FeaturedProjects"
+import { Hero } from "@/components/home/Hero"
+import { PhotographyTeaser } from "@/components/home/PhotographyTeaser"
+
+export default function Home() {
+  const location = useLocation()
+
+  // Scroll to the matching section when arriving via a hash link
+  // (e.g. navigating from another page to "/#projects").
+  useEffect(() => {
+    if (!location.hash) return
+    const id = location.hash.slice(1)
+    const target = document.getElementById(id)
+    target?.scrollIntoView({ behavior: "smooth" })
+  }, [location.hash])
+
+  return (
+    <PageLayout>
+      <TechnicalGrid />
+      <Hero />
+      <About />
+      <Experience />
+      <FeaturedProjects />
+      <PhotographyTeaser />
+    </PageLayout>
+  )
+}
