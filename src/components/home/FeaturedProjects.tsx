@@ -4,6 +4,7 @@ import { motion } from "framer-motion"
 import { Link } from "react-router-dom"
 
 import { Card } from "@/components/ui/card"
+import { LockedContent } from "@/components/ui/LockedContent"
 import { TechTag } from "@/components/ui/TechTag"
 import { projects } from "@/data/projects"
 
@@ -33,13 +34,19 @@ export function FeaturedProjects() {
               className="flex flex-col justify-between overflow-hidden border-outline-variant/20"
             >
               {project.image && (
-                <div className="aspect-video w-full overflow-hidden bg-surface-container-highest">
-                  <img
-                    src={project.image}
-                    alt={project.imageAlt}
-                    className="size-full object-cover"
-                  />
-                </div>
+                <LockedContent
+                  locked={project.status === "wip"}
+                  compact
+                  className="aspect-video w-full overflow-hidden"
+                >
+                  <div className="size-full bg-surface-container-highest">
+                    <img
+                      src={project.image}
+                      alt={project.imageAlt}
+                      className="size-full object-cover"
+                    />
+                  </div>
+                </LockedContent>
               )}
               <div className="flex flex-1 flex-col justify-between p-5">
                 <div>
@@ -51,9 +58,11 @@ export function FeaturedProjects() {
                       </span>
                     )}
                   </div>
-                  <p className="line-clamp-2 text-sm text-on-surface-variant">
-                    {project.description}
-                  </p>
+                  <LockedContent locked={project.status === "wip"} compact className="rounded">
+                    <p className="line-clamp-2 text-sm text-on-surface-variant">
+                      {project.description}
+                    </p>
+                  </LockedContent>
                 </div>
                 <div className="mt-4 flex flex-wrap gap-x-3 gap-y-1.5 font-label-mono text-[10px] text-outline">
                   {project.tags.map((tag) => (

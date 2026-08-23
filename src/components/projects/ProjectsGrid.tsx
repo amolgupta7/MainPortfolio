@@ -2,6 +2,7 @@ import { Icon } from "@iconify/react"
 import externalLinkIcon from "@iconify-icons/ph/arrow-square-out-fill"
 import { Link } from "react-router-dom"
 
+import { LockedContent } from "@/components/ui/LockedContent"
 import { TechTag } from "@/components/ui/TechTag"
 import { projects, type Project } from "@/data/projects"
 import { cn } from "@/lib/utils"
@@ -16,30 +17,38 @@ import { cn } from "@/lib/utils"
  * looks like. */
 
 function ProjectTile({ project }: { project: Project }) {
+  const isWip = project.status === "wip"
+
   const content = (
-    <div
-      className={cn(
-        "group relative h-[260px] w-full overflow-hidden rounded border border-outline-variant/30 bg-surface-container-highest transition-colors md:h-[340px]",
-        project.repoUrl && "hover:border-primary/50"
-      )}
+    <LockedContent
+      locked={isWip}
+      compact
+      className="h-[260px] w-full overflow-hidden rounded md:h-[340px]"
     >
-      {project.image ? (
-        <img
-          src={project.image}
-          alt={project.imageAlt}
-          className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-        />
-      ) : (
-        <div className="flex size-full items-center justify-center">
-          <span className="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant transition-colors group-hover:text-primary">
-            {project.title}
-          </span>
-        </div>
-      )}
-    </div>
+      <div
+        className={cn(
+          "group relative size-full overflow-hidden rounded border border-outline-variant/30 bg-surface-container-highest transition-colors",
+          project.repoUrl && "hover:border-primary/50"
+        )}
+      >
+        {project.image ? (
+          <img
+            src={project.image}
+            alt={project.imageAlt}
+            className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+          />
+        ) : (
+          <div className="flex size-full items-center justify-center">
+            <span className="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant transition-colors group-hover:text-primary">
+              {project.title}
+            </span>
+          </div>
+        )}
+      </div>
+    </LockedContent>
   )
 
-  if (project.repoUrl) {
+  if (project.repoUrl && !isWip) {
     return (
       <a href={project.repoUrl} target="_blank" rel="noreferrer" aria-label={`Open ${project.title} on GitHub`}>
         {content}
@@ -110,9 +119,15 @@ export function ProjectsGrid() {
               <h2 className="font-headline-md text-headline-md text-on-surface">
                 {project.title}
               </h2>
-              <p className="font-body-md text-body-md text-on-surface-variant">
-                {project.description}
-              </p>
+              <LockedContent
+                locked={project.status === "wip"}
+                compact
+                className="rounded"
+              >
+                <p className="font-body-md text-body-md text-on-surface-variant">
+                  {project.description}
+                </p>
+              </LockedContent>
               <ProjectMeta project={project} />
             </div>
           </article>

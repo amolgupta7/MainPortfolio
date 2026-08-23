@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "WebSearch",
+      "WebFetch(domain:careerrelay.ai)",
+      "WebFetch(domain:quietapply.ai)"
+    ]
+  }
+}

@@ -9,6 +9,7 @@ import { ProblemGrid } from "@/components/blueprint/ProblemGrid"
 import { ResultsGrid } from "@/components/blueprint/ResultsGrid"
 import { Section } from "@/components/blueprint/Section"
 import { TableOfContents } from "@/components/blueprint/TableOfContents"
+import { LockedContent } from "@/components/ui/LockedContent"
 import { blueprints } from "@/data/blueprint"
 import { projects } from "@/data/projects"
 
@@ -20,6 +21,10 @@ export default function Blueprint() {
   if (!project || !data) {
     return <Navigate to="/projects" replace />
   }
+
+  // Work-in-progress projects get their write-up blurred out behind a lock —
+  // the implementation is still unique/unshipped, so it isn't shown in full.
+  const isWip = project.status === "wip"
 
   // Cycle to whichever project comes next in the list, wrapping back to the
   // start — a real link instead of a placeholder "next project" name.
@@ -50,7 +55,11 @@ export default function Blueprint() {
         <BlueprintHero data={data} />
 
         <div className="mx-auto grid max-w-container-max grid-cols-1 gap-gutter px-margin-mobile md:grid-cols-12 md:px-margin-desktop">
-          <div className="col-span-1 space-y-16 md:col-span-8 md:space-y-24">
+          <LockedContent
+            locked={isWip}
+            className="col-span-1 space-y-16 md:col-span-8 md:space-y-24"
+            message="This project is still in active development — implementation details stay private until it ships."
+          >
             <Section id="overview" title="01. Overview">
               <div className="space-y-4 font-body-md text-body-md text-on-surface-variant">
                 {data.overview.map((paragraph) => (
@@ -83,7 +92,7 @@ export default function Blueprint() {
             <Section id="results" title="05. Results & Impact">
               <ResultsGrid results={data.results} />
             </Section>
-          </div>
+          </LockedContent>
 
           <TableOfContents team={data.team} />
         </div>

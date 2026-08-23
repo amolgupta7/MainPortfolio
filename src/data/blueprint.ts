@@ -34,13 +34,13 @@ export interface BlueprintEntry {
 export const blueprints: Record<string, BlueprintEntry> = {
   candlecraft: {
     code: "BP-2026-01",
-    title: "CandleCraft",
+    title: "Candle Craft",
     summary:
       "An automated intraday trading system that scans candlestick patterns and technical indicators on Indian equities and ETFs to surface high-probability trade setups, executes through broker APIs with dynamic stop-loss and position sizing, and backtests strategies against historical data before going live.",
     role: "Solo Developer",
     stack: ["React", "TypeScript", "Node.js", "PostgreSQL", "WebSockets"],
     overview: [
-      "The goal is disciplined, emotion-free execution: instead of manually watching charts, CandleCraft continuously analyzes OHLCV data pulled from broker/market-data APIs (Zerodha Kite, Upstox) and flags setups the moment its rules engine recognizes a qualifying pattern.",
+      "The goal is disciplined, emotion-free execution: instead of manually watching charts, Candle Craft continuously analyzes OHLCV data pulled from broker/market-data APIs (Zerodha Kite, Upstox) and flags setups the moment its rules engine recognizes a qualifying pattern.",
       "A backtesting module replays historical data against the same strategy logic before anything goes live, so entry/exit rules can be validated and refined against past market behavior rather than tested with real capital first.",
     ],
     problems: [
@@ -84,13 +84,13 @@ export const blueprints: Record<string, BlueprintEntry> = {
 
   quiteApply: {
     code: "BP-2026-02",
-    title: "QuietApply",
+    title: "Quiet Apply",
     summary:
       "Automates the tedious parts of job hunting — pulls listings from job boards and career pages, matches them against your résumé and preferences, auto-fills applications, and tracks status on one dashboard.",
     role: "Solo Developer",
     stack: ["React", "TypeScript", "Playwright", "Node.js", "PostgreSQL"],
     overview: [
-      "Applying to dozens of roles across different portals means repeating the same form fields over and over. QuietApply pulls listings from major job boards and company career pages, normalizes them into one schema, and matches them against a stored résumé/preference profile using keyword and embedding similarity.",
+      "Applying to dozens of roles across different portals means repeating the same form fields over and over. Quiet Apply pulls listings from major job boards and company career pages, normalizes them into one schema, and matches them against a stored résumé/preference profile using keyword and embedding similarity.",
       "Rather than just surfacing matches, it also automates the form-filling itself — Playwright drives the actual application submission using per-portal field-mapping heuristics, and a Kanban-style dashboard tracks every application's status end to end.",
     ],
     problems: [
