@@ -33,8 +33,8 @@ export const projects: Project[] = [
     status: "wip",
   },
   {
-    slug: "hirejet",
-    title: "HireJet",
+    slug: "quiteApply",
+    title: "QuietApply",
     description:
       "Automates the tedious parts of job hunting — pulls listings from job boards and career pages, matches them against your résumé and preferences, auto-fills applications, and tracks status (applied/interview/rejected) on one dashboard.",
     tags: ["React", "TypeScript", "Playwright", "Node.js", "PostgreSQL"],

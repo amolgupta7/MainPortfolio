@@ -82,15 +82,15 @@ export const blueprints: Record<string, BlueprintEntry> = {
     team: ["Solo project — design, build, and backtesting"],
   },
 
-  hirejet: {
+  quiteApply: {
     code: "BP-2026-02",
-    title: "HireJet",
+    title: "QuietApply",
     summary:
       "Automates the tedious parts of job hunting — pulls listings from job boards and career pages, matches them against your résumé and preferences, auto-fills applications, and tracks status on one dashboard.",
     role: "Solo Developer",
     stack: ["React", "TypeScript", "Playwright", "Node.js", "PostgreSQL"],
     overview: [
-      "Applying to dozens of roles across different portals means repeating the same form fields over and over. HireJet pulls listings from major job boards and company career pages, normalizes them into one schema, and matches them against a stored résumé/preference profile using keyword and embedding similarity.",
+      "Applying to dozens of roles across different portals means repeating the same form fields over and over. QuietApply pulls listings from major job boards and company career pages, normalizes them into one schema, and matches them against a stored résumé/preference profile using keyword and embedding similarity.",
       "Rather than just surfacing matches, it also automates the form-filling itself — Playwright drives the actual application submission using per-portal field-mapping heuristics, and a Kanban-style dashboard tracks every application's status end to end.",
     ],
     problems: [
