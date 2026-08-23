@@ -24,11 +24,11 @@ export const site = {
 export const homeNavLinks = [
   { label: "About", hash: "about" },
   { label: "Experience", hash: "experience" },
-  { label: "Projects", hash: "projects" },
 ]
 
 /** Standalone routed pages, also shown in the primary nav. */
 export const pageNavLinks = [
+  { label: "Projects", to: "/projects" },
   { label: "Photography", to: "/gallery" },
   { label: "Contact", to: "/contact" },
 ]

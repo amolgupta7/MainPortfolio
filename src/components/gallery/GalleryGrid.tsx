@@ -5,83 +5,127 @@ import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { photos, type PhotoItem } from "@/data/photography"
 import { cn } from "@/lib/utils"
 
-/** Motion curves lifted from the "Photography Gallery - Immersive Motion"
- * Stitch screen: a snappy ease for hover-zoom/lightbox, and a slower
- * "curtain" ease for the clip-path reveal-on-scroll and caption flicker. */
-const immersiveEase = [0.25, 1, 0.5, 1] as const
-const curtainEase = [0.77, 0, 0.175, 1] as const
+/** Large-format, alternating photo/text layout ported from the "Photography
+ * Gallery - Monolith Grid" Stitch screen. Photos show at full color/opacity
+ * always, with a subtle scale/saturation lift on hover.
+ *
+ * Each tile's aspect-ratio is set to the photo's own real width/height
+ * (see photography.ts) rather than a fixed pixel height, so nothing gets
+ * cropped or stretched out of its original proportions. */
+const revealEase = [0.16, 1, 0.3, 1] as const
 
-const spanClasses: Record<PhotoItem["span"], string> = {
-  featured:
-    "md:col-span-8 aspect-[16/9] md:aspect-auto md:h-[600px]",
-  tall: "md:col-span-4 aspect-[4/5]",
-  square: "md:col-span-4 aspect-[4/5] md:aspect-square",
-  wide: "md:col-span-8 aspect-[16/9] md:h-[400px]",
-  half: "md:col-span-6 aspect-[4/3]",
+function MonolithImage({ photo, onOpen }: { photo: PhotoItem; onOpen: () => void }) {
+  return (
+    <div
+      style={{ aspectRatio: `${photo.width} / ${photo.height}` }}
+      className="group relative w-full overflow-hidden rounded border border-outline-variant/30 bg-surface-container"
+    >
+      <button
+        type="button"
+        onClick={onOpen}
+        className="absolute inset-0 size-full cursor-zoom-in outline-none ring-primary focus-visible:ring-2"
+        aria-label={`Open ${photo.title}`}
+      >
+        <img
+          src={photo.image}
+          alt={photo.imageAlt}
+          loading="lazy"
+          className="size-full object-cover transition-[transform,filter] duration-700 ease-out group-hover:scale-[1.05] group-hover:saturate-[1.15]"
+        />
+      </button>
+    </div>
+  )
 }
 
 export function GalleryGrid() {
   const [active, setActive] = useState<PhotoItem | null>(null)
+  let sideIndex = 0
 
   return (
     <>
-      <div className="grid grid-cols-1 gap-gutter md:grid-cols-12">
-        {photos.map((photo, index) => (
-          <motion.button
-            key={photo.id}
-            type="button"
-            onClick={() => setActive(photo)}
-            initial={{ opacity: 0, y: 24 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{
-              duration: 0.7,
-              ease: immersiveEase,
-              delay: (index % 4) * 0.08,
-            }}
-            className={cn(
-              "group relative col-span-1 cursor-zoom-in overflow-hidden bg-surface-container-low text-left outline-none ring-primary focus-visible:ring-2",
-              spanClasses[photo.span]
-            )}
-          >
-            <motion.img
-              src={photo.image}
-              alt={photo.imageAlt}
-              loading="lazy"
-              initial={{ clipPath: "inset(100% 0 0 0)" }}
-              whileInView={{ clipPath: "inset(0% 0 0 0)" }}
-              viewport={{ once: true, margin: "-80px" }}
-              transition={{
-                duration: 1.1,
-                ease: curtainEase,
-                delay: (index % 4) * 0.08,
-              }}
-              className="size-full origin-center scale-100 object-cover grayscale transition-[transform,filter] duration-[1.2s] ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.08] group-hover:grayscale-0 group-hover:saturate-[1.2]"
-            />
-            <span className="pointer-events-none absolute inset-0 border border-outline-variant/10 transition-colors group-hover:border-primary" />
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-surface to-transparent p-4 md:p-6">
-              <motion.p
-                initial={{ opacity: 0 }}
-                whileInView={{ opacity: [0, 1, 0.2, 1, 0.2, 1] }}
-                viewport={{ once: true, margin: "-80px" }}
-                transition={{
-                  duration: 1,
-                  times: [0, 0.2, 0.22, 0.63, 0.65, 1],
-                  delay: (index % 4) * 0.08 + 0.4,
-                }}
-                className="font-label-mono text-label-mono text-primary"
+      <div className="flex flex-col gap-section-gap">
+        {photos.map((photo) => {
+          if (photo.span === "featured") {
+            return (
+              <motion.article
+                key={photo.id}
+                initial={{ opacity: 0, y: 50 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-100px" }}
+                transition={{ duration: 0.8, ease: revealEase }}
+                className="flex flex-col gap-gutter"
               >
-                {photo.caption}
-              </motion.p>
-            </div>
-          </motion.button>
-        ))}
+                <MonolithImage photo={photo} onOpen={() => setActive(photo)} />
+                <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
+                  <div>
+                    <h2 className="font-headline-md text-headline-md text-on-surface">
+                      {photo.title}
+                    </h2>
+                    <p className="mt-2 max-w-xl font-body-md text-body-md text-on-surface-variant">
+                      {photo.description}
+                    </p>
+                  </div>
+                  <div className="flex w-full gap-6 border-t border-outline-variant/50 pt-4 font-label-mono text-label-mono text-primary md:w-auto">
+                    <div className="flex flex-col gap-1">
+                      <span className="text-on-surface-variant">CAPTION</span>
+                      <span>{photo.caption}</span>
+                    </div>
+                    <div className="flex flex-col gap-1">
+                      <span className="text-on-surface-variant">FORMAT</span>
+                      <span>{photo.originalFormat}</span>
+                    </div>
+                  </div>
+                </div>
+              </motion.article>
+            )
+          }
+
+          const reversed = sideIndex % 2 === 1
+          sideIndex++
+
+          return (
+            <motion.article
+              key={photo.id}
+              initial={{ opacity: 0, y: 50 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{ duration: 0.8, ease: revealEase }}
+              className="grid grid-cols-1 items-center gap-gutter md:grid-cols-12"
+            >
+              <div className={cn("md:col-span-8", reversed && "md:order-2")}>
+                <MonolithImage photo={photo} onOpen={() => setActive(photo)} />
+              </div>
+              <div
+                className={cn(
+                  "flex flex-col gap-4 md:col-span-4",
+                  reversed ? "md:order-1 md:pr-gutter" : "md:pl-gutter"
+                )}
+              >
+                <h2 className="font-headline-md text-headline-md text-on-surface">
+                  {photo.title}
+                </h2>
+                <p className="font-body-md text-body-md text-on-surface-variant">
+                  {photo.description}
+                </p>
+                <div
+                  className={cn(
+                    "mt-4 flex flex-col gap-2 border-outline-variant/50 py-2 font-label-mono text-label-mono text-primary",
+                    reversed ? "border-r-2 pr-4 text-right md:text-left" : "border-l-2 pl-4"
+                  )}
+                >
+                  <span>{photo.caption}</span>
+                  <span>FORMAT: {photo.originalFormat}</span>
+                </div>
+              </div>
+            </motion.article>
+          )
+        })}
       </div>
 
       <Dialog open={active !== null} onOpenChange={(open) => !open && setActive(null)}>
         <DialogContent className="p-4 duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
           <DialogTitle className="sr-only">
-            {active?.caption ?? "Photo preview"}
+            {active?.title ?? "Photo preview"}
           </DialogTitle>
           {active && (
             <>

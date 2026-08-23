@@ -39,16 +39,20 @@ function SectionLink({
 export function Navbar() {
   const [open, setOpen] = useState(false)
 
+  // Deliberately inverted relative to the page: bg-inverse-surface/text-
+  // inverse-on-surface always contrast against whichever theme is active
+  // (see the inverse-* tokens in index.css), so the bar reads as a distinct
+  // band regardless of dark/light mode.
   const desktopLinkClass =
-    "font-label-mono text-label-mono text-on-surface-variant transition-colors duration-300 hover:text-primary"
-  const activeLinkClass = "text-primary"
+    "font-label-mono text-label-mono text-inverse-on-surface/70 transition-colors duration-300 hover:text-inverse-primary"
+  const activeLinkClass = "text-inverse-primary"
 
   return (
-    <header className="sticky top-0 z-50 border-b border-outline-variant/30 bg-surface/80 backdrop-blur-xl">
+    <header className="sticky top-0 z-50 border-b border-inverse-on-surface/15 bg-inverse-surface">
       <div className="mx-auto flex w-full max-w-container-max items-center justify-between px-margin-mobile py-4 md:px-margin-desktop">
         <Link
           to="/"
-          className="font-display-lg text-body-lg font-bold tracking-tighter text-on-surface"
+          className="font-display-lg text-body-lg font-bold tracking-tighter text-inverse-on-surface"
         >
           {site.wordmark}
         </Link>
@@ -73,7 +77,11 @@ export function Navbar() {
               {link.label}
             </NavLink>
           ))}
-          <Button asChild size="sm" className="ml-4">
+          <Button
+            asChild
+            size="sm"
+            className="ml-4 bg-inverse-primary text-inverse-surface hover:bg-inverse-primary/85"
+          >
             <a href={site.resumeUrl} download>
               Résumé
             </a>
@@ -84,7 +92,7 @@ export function Navbar() {
           type="button"
           aria-label="Open menu"
           aria-expanded={open}
-          className="text-on-surface transition-colors hover:text-primary md:hidden"
+          className="text-inverse-on-surface transition-colors hover:text-inverse-primary md:hidden"
           onClick={() => setOpen(true)}
         >
           <Menu className="size-7" />

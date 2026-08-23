@@ -27,7 +27,7 @@ export default function CaseStudy() {
       <header className="sticky top-0 z-50 border-b border-outline-variant/30 bg-surface/80 backdrop-blur-xl">
         <div className="mx-auto flex h-16 w-full max-w-container-max items-center justify-between px-margin-mobile md:px-margin-desktop">
           <Link
-            to="/#projects"
+            to="/projects"
             className="flex items-center gap-2 font-label-mono text-label-mono text-on-surface-variant transition-colors hover:text-primary"
           >
             <ArrowLeft className="size-4" />
@@ -93,7 +93,7 @@ export default function CaseStudy() {
       <div className="border-t border-outline-variant/20 bg-surface-container-lowest pt-16">
         <div className="mx-auto flex max-w-container-max flex-col items-center px-margin-mobile md:px-margin-desktop">
           <Link
-            to="/#projects"
+            to="/projects"
             className="group mb-16 flex flex-col items-center text-center"
           >
             <span className="mb-4 font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant transition-colors group-hover:text-primary">

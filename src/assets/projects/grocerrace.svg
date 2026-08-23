@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#8b90a0" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+    <marker id="tip-primary" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#adc6ff"/>
+    </marker>
+    <marker id="tip-tertiary" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#ffb595"/>
+    </marker>
+    <marker id="tip-secondary" markerWidth="8" markerHeight="8" refX="4" refY="4" orient="auto">
+      <path d="M0,0 L8,4 L0,8 Z" fill="#c8c6c5"/>
+    </marker>
+  </defs>
+  <rect width="400" height="250" fill="#1a1c1c"/>
+  <rect width="400" height="250" fill="url(#grid)"/>
+
+  <!-- three racing lanes, different lengths = different delivery speeds -->
+  <g stroke-width="10" stroke-linecap="round" fill="none">
+    <line x1="40" y1="80" x2="330" y2="80" stroke="#adc6ff" marker-end="url(#tip-primary)"/>
+    <line x1="40" y1="130" x2="260" y2="130" stroke="#ffb595" marker-end="url(#tip-tertiary)"/>
+    <line x1="40" y1="180" x2="200" y2="180" stroke="#c8c6c5" marker-end="url(#tip-secondary)"/>
+  </g>
+
+  <!-- lane labels as small ticks -->
+  <g fill="#c1c6d7" fill-opacity="0.7">
+    <rect x="20" y="76" width="10" height="8" rx="2"/>
+    <rect x="20" y="126" width="10" height="8" rx="2"/>
+    <rect x="20" y="176" width="10" height="8" rx="2"/>
+  </g>
+
+  <!-- finish line -->
+  <line x1="350" y1="50" x2="350" y2="210" stroke="#414755" stroke-width="2" stroke-dasharray="4 4"/>
+
+  <!-- price tags along the fastest lane -->
+  <g fill="#121414" stroke="#adc6ff" stroke-width="1.5">
+    <circle cx="150" cy="80" r="7"/>
+    <circle cx="230" cy="80" r="7"/>
+  </g>
+</svg>

@@ -3,7 +3,7 @@ import { Briefcase, Code2, Mail, MapPin } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { site } from "@/data/site"
-import heroPhoto from "@/data/my_photo.jpeg"
+import heroPhoto from "@/data/my_photo_2.jpeg"
 
 const socialLinks = [
   { label: "GitHub", href: site.github, icon: Code2 },

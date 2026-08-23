@@ -165,6 +165,15 @@
     --color-outline-variant: #d9d9dc;
     --color-primary: #005bc1;
     --color-on-primary: #ffffff;
+
+    /* Deliberately opposite of this theme's own surface — used by Navbar
+       and Footer so they always contrast against the current page
+       background, in both modes. Dark mode's defaults for these three
+       (from @theme) are already the correct opposite pairing; this is just
+       the light-mode half. */
+    --color-inverse-surface: #121414;
+    --color-inverse-on-surface: #e2e2e2;
+    --color-inverse-primary: #adc6ff;
   }
 
   /* Faint 40px technical grid overlay used behind hero/gallery sections */

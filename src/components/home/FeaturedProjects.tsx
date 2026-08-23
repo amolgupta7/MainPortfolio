@@ -1,30 +1,25 @@
 import { motion } from "framer-motion"
-import { ArrowRight, ExternalLink } from "lucide-react"
+import { ExternalLink, FolderGit2 } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Card } from "@/components/ui/card"
+import { TechTag } from "@/components/ui/TechTag"
 import { projects } from "@/data/projects"
 
 export function FeaturedProjects() {
   const featured = projects.find((project) => project.featured)
-  const secondary = projects.filter((project) => !project.featured)
+  // Same pattern as the Photography teaser below: one main piece, a couple
+  // more beneath it, then a tile that links out to the full page instead of
+  // trying to list everything here.
+  const preview = projects.filter((project) => !project.featured).slice(0, 2)
 
   return (
     <section id="projects" className="border-t border-outline-variant/20">
       <div className="mx-auto max-w-container-max px-margin-mobile py-16 md:px-margin-desktop md:py-section-gap">
-        <div className="mb-8 flex items-end justify-between">
-          <h2 className="flex items-center gap-4 font-headline-sm text-headline-sm text-on-surface">
-            <span className="font-label-mono text-label-mono text-primary">03.</span>{" "}
-            Featured Work
-          </h2>
-          <a
-            href="#projects"
-            className="group flex items-center font-label-mono text-label-mono text-primary"
-          >
-            All Projects
-            <ArrowRight className="ml-1 size-4 transition-transform group-hover:translate-x-1" />
-          </a>
-        </div>
+        <h2 className="mb-8 flex items-center gap-4 font-headline-sm text-headline-sm text-on-surface">
+          <span className="font-label-mono text-label-mono text-primary">03.</span>{" "}
+          Featured Work
+        </h2>
 
         {featured && (
           <motion.div
@@ -65,12 +60,11 @@ export function FeaturedProjects() {
                 </p>
                 <div className="flex gap-2">
                   {featured.tags.map((tag) => (
-                    <span
+                    <TechTag
                       key={tag}
+                      tag={tag}
                       className="rounded-xs bg-primary/10 px-2 py-1 font-label-mono text-[10px] text-primary"
-                    >
-                      {tag}
-                    </span>
+                    />
                   ))}
                 </div>
               </div>
@@ -78,25 +72,53 @@ export function FeaturedProjects() {
           </motion.div>
         )}
 
-        <div className="flex snap-x snap-mandatory gap-4 overflow-x-auto pb-2 hide-scrollbar">
-          {secondary.map((project) => (
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+          {preview.map((project) => (
             <Card
               key={project.slug}
-              className="flex min-w-[280px] snap-center flex-col justify-between border-outline-variant/20 p-5"
+              className="flex flex-col justify-between overflow-hidden border-outline-variant/20"
             >
-              <div>
-                <h4 className="mb-2 font-body-lg text-on-surface">
-                  {project.title}
-                </h4>
-                <p className="line-clamp-2 text-sm text-on-surface-variant">
-                  {project.description}
-                </p>
-              </div>
-              <div className="mt-4 font-label-mono text-[10px] text-outline">
-                {project.tags.join(" • ")}
+              {project.image && (
+                <div className="aspect-video w-full overflow-hidden bg-surface-container-highest">
+                  <img
+                    src={project.image}
+                    alt={project.imageAlt}
+                    className="size-full object-cover"
+                  />
+                </div>
+              )}
+              <div className="flex flex-1 flex-col justify-between p-5">
+                <div>
+                  <div className="mb-2 flex items-center gap-2">
+                    <h4 className="font-body-lg text-on-surface">{project.title}</h4>
+                    {project.status === "wip" && (
+                      <span className="rounded-xs bg-tertiary/10 px-1.5 py-0.5 font-label-mono text-[9px] tracking-wide text-tertiary">
+                        SHIPPING
+                      </span>
+                    )}
+                  </div>
+                  <p className="line-clamp-2 text-sm text-on-surface-variant">
+                    {project.description}
+                  </p>
+                </div>
+                <div className="mt-4 flex flex-wrap gap-x-3 gap-y-1.5 font-label-mono text-[10px] text-outline">
+                  {project.tags.map((tag) => (
+                    <TechTag key={tag} tag={tag} />
+                  ))}
+                </div>
               </div>
             </Card>
           ))}
+
+          <Link
+            to="/projects"
+            className="group flex aspect-video cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-outline-variant/20 bg-surface-container transition-colors hover:bg-surface-container-high sm:aspect-auto"
+          >
+            <FolderGit2 className="size-6 text-primary transition-transform group-hover:scale-110" />
+            <span className="font-label-mono text-[11px] uppercase tracking-widest text-on-surface-variant">
+              View All Projects
+            </span>
+          </Link>
         </div>
       </div>
     </section>

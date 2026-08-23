@@ -11,13 +11,13 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative z-10 border-t border-outline-variant/20 bg-surface-container-lowest">
+    <footer className="relative z-10 border-t border-inverse-on-surface/15 bg-inverse-surface">
       <div className="mx-auto flex w-full max-w-container-max flex-col items-center justify-between gap-8 px-margin-mobile py-12 md:flex-row md:px-margin-desktop md:py-section-gap">
         <div className="text-center md:text-left">
-          <div className="font-headline-sm text-headline-sm text-on-surface">
+          <div className="font-headline-sm text-headline-sm text-inverse-on-surface">
             {site.wordmark}
           </div>
-          <p className="mt-2 font-label-mono text-label-mono text-xs text-on-surface-variant">
+          <p className="mt-2 font-label-mono text-label-mono text-xs text-inverse-on-surface/70">
             {site.copyright}
           </p>
         </div>
@@ -31,7 +31,7 @@ export function Footer() {
               <Link
                 key={link.label}
                 to={link.href}
-                className="rounded-xs font-label-mono text-label-mono text-on-surface-variant transition-colors hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="rounded-xs font-label-mono text-label-mono text-inverse-on-surface/70 transition-colors hover:text-inverse-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inverse-primary"
               >
                 {link.label}
               </Link>
@@ -39,7 +39,7 @@ export function Footer() {
               <a
                 key={link.label}
                 href={link.href}
-                className="rounded-xs font-label-mono text-label-mono text-on-surface-variant transition-colors hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
+                className="rounded-xs font-label-mono text-label-mono text-inverse-on-surface/70 transition-colors hover:text-inverse-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inverse-primary"
                 target={link.href.startsWith("http") ? "_blank" : undefined}
                 rel={link.href.startsWith("http") ? "noreferrer" : undefined}
               >

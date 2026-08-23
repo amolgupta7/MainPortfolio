@@ -30,7 +30,7 @@ export function PhotographyTeaser() {
               <img
                 src={photo.image}
                 alt={photo.imageAlt}
-                className="size-full object-cover grayscale opacity-80 transition-all duration-500 group-hover:scale-105 group-hover:opacity-100 group-hover:grayscale-0"
+                className="size-full object-cover transition-transform duration-500 group-hover:scale-105"
               />
             </div>
           ))}

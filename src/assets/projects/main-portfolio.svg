@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250">
+  <defs>
+    <pattern id="grid" width="20" height="20" patternUnits="userSpaceOnUse">
+      <path d="M 20 0 L 0 0 0 20" fill="none" stroke="#8b90a0" stroke-opacity="0.08" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="400" height="250" fill="#1a1c1c"/>
+  <rect width="400" height="250" fill="url(#grid)"/>
+
+  <!-- offset ghost window behind, suggesting layered/versioned builds -->
+  <rect x="90" y="45" width="260" height="150" rx="6" fill="none" stroke="#414755" stroke-opacity="0.4" stroke-width="1.5"/>
+
+  <!-- stacked browser-window wireframes, layered -->
+  <g>
+    <rect x="60" y="70" width="260" height="150" rx="6" fill="#1e2020" stroke="#414755" stroke-width="1.5"/>
+    <rect x="60" y="70" width="260" height="18" rx="6" fill="#282a2b"/>
+    <circle cx="72" cy="79" r="3" fill="#8b90a0"/>
+    <circle cx="82" cy="79" r="3" fill="#8b90a0"/>
+    <circle cx="92" cy="79" r="3" fill="#8b90a0"/>
+
+    <rect x="80" y="108" width="120" height="10" rx="2" fill="#adc6ff"/>
+    <rect x="80" y="126" width="180" height="6" rx="2" fill="#c1c6d7" fill-opacity="0.5"/>
+    <rect x="80" y="140" width="150" height="6" rx="2" fill="#c1c6d7" fill-opacity="0.5"/>
+
+    <rect x="80" y="160" width="60" height="24" rx="4" fill="#adc6ff"/>
+    <rect x="150" y="160" width="60" height="24" rx="4" fill="none" stroke="#414755" stroke-width="1.5"/>
+  </g>
+</svg>

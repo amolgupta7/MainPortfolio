@@ -7,6 +7,7 @@ import Contact from "@/pages/Contact"
 import Gallery from "@/pages/Gallery"
 import Home from "@/pages/Home"
 import NotFound from "@/pages/NotFound"
+import Projects from "@/pages/Projects"
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <ThemeToggle />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/projects" element={<Projects />} />
         <Route path="/gallery" element={<Gallery />} />
         <Route path="/contact" element={<Contact />} />
         <Route path="/case-study/:slug" element={<CaseStudy />} />
