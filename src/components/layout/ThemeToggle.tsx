@@ -8,8 +8,21 @@ type Theme = "dark" | "light"
 const STORAGE_KEY = "theme"
 
 function getInitialTheme(): Theme {
-  if (typeof document === "undefined") return "light"
-  return document.documentElement.dataset.theme === "dark" ? "dark" : "light"
+  if (typeof document === "undefined") return "dark"
+
+  try {
+    const stored = localStorage.getItem(STORAGE_KEY)
+    if (stored === "dark" || stored === "light") return stored
+  } catch {
+    // localStorage may be unavailable (private mode, blocked storage) — ignore.
+  }
+
+  // No saved preference yet — defer to the OS/browser setting, matching
+  // whatever the pre-hydration script in index.html already applied.
+  if (typeof window !== "undefined" && window.matchMedia?.("(prefers-color-scheme: light)").matches) {
+    return "light"
+  }
+  return document.documentElement.dataset.theme === "light" ? "light" : "dark"
 }
 
 /**

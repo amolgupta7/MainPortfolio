@@ -10,10 +10,20 @@
     />
     <meta name="theme-color" content="#121414" />
     <title>Amol Gupta | Software Engineer &amp; Photographer</title>
+    <!-- Applies the right theme before first paint, avoiding a flash of the
+         wrong one. Dark is the CSS default with no attribute set at all
+         (see :root[data-theme="light"] in index.css), so this only needs to
+         act when the result is "light" — either an explicit saved choice,
+         or (with nothing saved yet) the OS/browser's own preference. -->
     <script>
       try {
         var stored = localStorage.getItem("theme");
-        if (stored === "da") document.documentElement.dataset.theme = "light";
+        var wantsLight =
+          stored === "light" ||
+          (stored !== "dark" &&
+            window.matchMedia &&
+            window.matchMedia("(prefers-color-scheme: light)").matches);
+        if (wantsLight) document.documentElement.dataset.theme = "light";
       } catch (e) {}
     </script>
     <!-- Restores the real path after 404.html's GitHub Pages SPA redirect
