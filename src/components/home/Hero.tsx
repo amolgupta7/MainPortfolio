@@ -39,6 +39,17 @@ export function Hero() {
             architecture.
           </p>
 
+          {/* Mobile-only: same photo as the desktop side column, but placed
+              inline in the text flow (below the description, above the
+              buttons) since there's no side column to put it in below md. */}
+          <div className="mb-10 w-full overflow-hidden rounded-xl border border-outline-variant/30 bg-surface-container-highest backdrop-blur-sm md:hidden">
+            <img
+              className="h-auto w-full grayscale"
+              alt="Portrait of Amol Gupta"
+              src={heroPhoto}
+            />
+          </div>
+
           <div className="flex w-full flex-col gap-4 sm:w-auto sm:flex-row sm:flex-wrap sm:items-center">
             <Button asChild>
               <a href="#projects">View My Work</a>
