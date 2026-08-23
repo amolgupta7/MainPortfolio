@@ -156,7 +156,7 @@ export function ContactForm() {
               htmlFor="subject"
               className="block font-label-mono text-label-mono text-on-surface-variant"
             >
-              SUBJECT<span className="text-primary">*</span>
+              SUBJECT <span className="text-primary">*</span>
             </label>
             <input
               id="subject"
@@ -174,7 +174,7 @@ export function ContactForm() {
             htmlFor="message"
             className="block font-label-mono text-label-mono text-on-surface-variant"
           >
-            MESSAGE<span className="text-primary">*</span>
+            MESSAGE <span className="text-primary">*</span>
           </label>
           <textarea
             id="message"
