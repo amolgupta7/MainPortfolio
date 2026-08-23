@@ -1,11 +1,9 @@
 import { motion } from "framer-motion"
 
-import { caseStudy } from "@/data/caseStudy"
-
-export function ResultsGrid() {
+export function ResultsGrid({ results }: { results: { value: string; label: string }[] }) {
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
-      {caseStudy.results.map((result, index) => (
+      {results.map((result, index) => (
         <motion.div
           key={result.label}
           initial={{ opacity: 0, y: 12 }}

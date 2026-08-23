@@ -21,7 +21,8 @@ body copy, JetBrains Mono for labels, and a single electric-blue accent
 | Language | TypeScript | strict mode, path alias `@/*` → `src/*` |
 | Styling | [Tailwind CSS v4](https://tailwindcss.com) | CSS-first config (`@theme` in `src/index.css`) — no `tailwind.config.js` |
 | Components | [shadcn/ui](https://ui.shadcn.com) pattern | hand-rolled on Radix primitives (`Button`, `Card`, `Dialog`), used only where real interactivity is needed (nav menu, lightbox) |
-| Icons | [lucide-react](https://lucide.dev) | note: recent lucide-react versions dropped brand/logo icons; generic icons (`Code2`, `Briefcase`, `Mail`) stand in for GitHub/LinkedIn/Email, matching the source design's own choice of generic icons there |
+| Icons | [Iconify](https://iconify.design) (`@iconify/react` + offline `@iconify-icons/*` data packages) | the *only* icon source in this codebase — Phosphor (`ph`) for structural UI icons, Simple Icons + the `logos` collection for real brand marks (GitHub, LinkedIn, WhatsApp, Gmail, Visa, tech-stack tags). Bundled at build time, no runtime calls to Iconify's API |
+| Forms | [Web3Forms](https://web3forms.com) | contact form submissions POST directly to Web3Forms' API and land in your inbox — no backend of your own. Needs `VITE_WEB3FORMS_ACCESS_KEY` set (see [Setup](#setup)) |
 | Routing | [React Router v7](https://reactrouter.com) | 4 routes — see below |
 | Animation | [Framer Motion](https://motion.dev) | scroll-reveal across the site; the Photography grid additionally uses a clip-path "curtain" reveal, a flicker-in caption, and a refined hover-zoom/desaturate curve, ported from Stitch's "Photography Gallery - Immersive Motion" screen |
 | Theming | CSS custom properties + `data-theme` | fixed bottom-right toggle (`ThemeToggle`) flips the whole site between dark (default) and light by swapping the same M3-style color tokens at `:root` |
@@ -35,7 +36,7 @@ sections) only ever appeared as anchor-scrolled sections on the homepage, while
 their own nav/header treatment — so that's how they're implemented:
 
 - `/` — Home (Hero → About → Experience → Featured Projects → Photography teaser)
-- `/case-study/:slug` — Case study detail (currently: `hope-speech-detection`)
+- `/blueprint/:slug` — Project detail page (currently: `hope-speech-detection`)
 - `/gallery` — Full photography gallery with a lightbox
 - `/contact` — Contact form + availability/social sidebar
 
@@ -47,6 +48,23 @@ npm run dev
 ```
 
 Then open the printed local URL (defaults to `http://localhost:5173`).
+
+### Setup
+
+The contact form needs a Web3Forms access key to actually deliver
+submissions:
+
+1. Get a free key at [web3forms.com](https://web3forms.com) (just your
+   email, no account/password — the key arrives instantly).
+2. Copy `.env.example` to `.env.local` and paste it in:
+   ```
+   VITE_WEB3FORMS_ACCESS_KEY=your-key-here
+   ```
+3. For the deployed site, add the same value as a repository secret named
+   `WEB3FORMS_ACCESS_KEY` (Settings → Secrets and variables → Actions) — the
+   deploy workflow passes it through as `VITE_WEB3FORMS_ACCESS_KEY` at build
+   time. Without it, the form fails gracefully with an error message instead
+   of silently doing nothing.
 
 Other scripts:
 
@@ -68,9 +86,9 @@ src/
 │  ├─ home/              # Hero, About, Experience, FeaturedProjects, PhotographyTeaser
 │  ├─ gallery/           # GalleryGrid (+ built-in lightbox)
 │  ├─ contact/           # ContactForm, ContactSidebar
-│  └─ case-study/        # CaseStudyHero, Section, ProblemGrid, DecisionsList, ResultsGrid, TableOfContents
+│  └─ blueprint/        # BlueprintHero, Section, ProblemGrid, DecisionsList, ResultsGrid, TableOfContents
 ├─ pages/              # one file per route, composes the above components
-├─ data/               # typed content: site.ts, experience.ts, projects.ts, photography.ts, caseStudy.ts
+├─ data/               # typed content: site.ts, experience.ts, projects.ts, photography.ts, blueprint.ts
 ├─ lib/utils.ts        # `cn()` class-merging helper
 ├─ index.css           # Tailwind v4 theme — all design tokens + light-mode override live here
 ├─ App.tsx             # route table + the global ThemeToggle
@@ -97,10 +115,8 @@ automatically since they all resolve through `var(--color-*)`.
 
 ## Known placeholders
 
-- **Contact form** — submits client-side only (no backend). Wire up
-  `ContactForm`'s `handleSubmit` in
-  [`src/components/contact/ContactForm.tsx`](src/components/contact/ContactForm.tsx)
-  to your email/API provider of choice (Formspree, Resend, etc.).
+- **Contact form** — wired to Web3Forms, but won't actually send anything
+  until `VITE_WEB3FORMS_ACCESS_KEY` is set — see [Setup](#setup).
 - **Featured Work** — sourced from the real `amolgupta7` GitHub account
   ([`src/data/projects.ts`](src/data/projects.ts)), but that account is fairly
   thin on public projects since most professional work (Visa) isn't public.

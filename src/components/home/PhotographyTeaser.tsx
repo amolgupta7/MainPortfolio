@@ -1,5 +1,6 @@
+import { Icon } from "@iconify/react"
+import cameraIcon from "@iconify-icons/ph/camera-fill"
 import { motion } from "framer-motion"
-import { Camera } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { photos } from "@/data/photography"
@@ -39,7 +40,10 @@ export function PhotographyTeaser() {
             className="group flex aspect-square cursor-pointer items-center justify-center border border-outline-variant/20 bg-surface-container transition-colors hover:bg-surface-container-high"
           >
             <div className="text-center">
-              <Camera className="mx-auto mb-2 size-6 text-primary transition-transform group-hover:scale-110" />
+              <Icon
+                icon={cameraIcon}
+                className="mx-auto mb-2 size-6 text-primary transition-transform group-hover:scale-110"
+              />
               <span className="block font-label-mono text-[11px] uppercase tracking-widest text-on-surface-variant">
                 View Gallery
               </span>

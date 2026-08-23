@@ -1,5 +1,7 @@
-import { ArrowRight, Briefcase, Code2, Mail, MessageCircle } from "lucide-react"
+import { Icon } from "@iconify/react"
+import arrowRightIcon from "@iconify-icons/ph/arrow-right-fill"
 
+import { SocialIcon } from "@/components/ui/SocialIcon"
 import { site } from "@/data/site"
 
 const links = [
@@ -7,25 +9,25 @@ const links = [
     label: "EMAIL",
     value: site.email,
     href: `mailto:${site.email}`,
-    icon: Mail,
+    iconLabel: "Email",
   },
   {
     label: "WHATSAPP",
     value: site.phone,
     href: site.whatsapp,
-    icon: MessageCircle,
+    iconLabel: "WhatsApp",
   },
   {
     label: "LINKEDIN",
     value: site.linkedinHandle,
     href: site.linkedin,
-    icon: Briefcase,
+    iconLabel: "LinkedIn",
   },
   {
     label: "GITHUB",
     value: site.githubHandle,
     href: site.github,
-    icon: Code2,
+    iconLabel: "GitHub",
   },
 ]
 
@@ -43,8 +45,9 @@ export function ContactSidebar() {
               Current Status
             </h3>
             <p className="font-body-md text-body-md text-on-surface-variant">
-              Available for full-time engineering roles starting Q3 2024.
-              Accepting select consulting engagements.
+              Currently employed full-time as a Senior Software Engineer at
+              Visa. Open to hearing about interesting opportunities and
+              select consulting work.
             </p>
           </div>
         </div>
@@ -55,7 +58,7 @@ export function ContactSidebar() {
           Connect
         </h3>
         <ul className="space-y-4">
-          {links.map(({ label, value, href, icon: Icon }) => (
+          {links.map(({ label, value, href, iconLabel }) => (
             <li key={label}>
               <a
                 href={href}
@@ -63,14 +66,20 @@ export function ContactSidebar() {
                 rel={href.startsWith("http") ? "noreferrer" : undefined}
                 className="group flex items-center gap-4 text-on-surface-variant transition-colors hover:text-primary"
               >
-                <Icon className="size-5" strokeWidth={1.5} />
+                <SocialIcon
+                  label={iconLabel}
+                  className="size-5 text-on-surface-variant transition-colors group-hover:text-primary"
+                />
                 <div className="flex-grow">
                   <p className="font-label-mono text-[11px] text-outline transition-colors group-hover:text-primary/70">
                     {label}
                   </p>
                   <p className="font-body-md text-body-md">{value}</p>
                 </div>
-                <ArrowRight className="size-4 -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100" />
+                <Icon
+                  icon={arrowRightIcon}
+                  className="size-4 -translate-x-2 opacity-0 transition-all group-hover:translate-x-0 group-hover:opacity-100"
+                />
               </a>
             </li>
           ))}

@@ -35,7 +35,7 @@ export const coreTechnologies = [
   "TanStack Query",
   "Redux Toolkit",
   "Sagas",
-  "Html",
+  "HTML",
   "CSS",
   "Tailwind CSS",
   "Nx",

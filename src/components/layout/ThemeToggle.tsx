@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
-import { Moon, Sun } from "lucide-react"
+import { Icon } from "@iconify/react"
+import moonIcon from "@iconify-icons/ph/moon-fill"
+import sunIcon from "@iconify-icons/ph/sun-fill"
 
 type Theme = "dark" | "light"
 
@@ -36,9 +38,9 @@ export function ThemeToggle() {
       className="fixed right-6 bottom-6 z-50 flex size-12 items-center justify-center rounded-full border border-outline-variant/30 bg-surface-container text-on-surface shadow-lg transition-colors hover:border-primary/50 hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary"
     >
       {theme === "dark" ? (
-        <Sun className="size-5" strokeWidth={1.75} />
+        <Icon icon={sunIcon} className="size-5" />
       ) : (
-        <Moon className="size-5" strokeWidth={1.75} />
+        <Icon icon={moonIcon} className="size-5" />
       )}
     </button>
   )

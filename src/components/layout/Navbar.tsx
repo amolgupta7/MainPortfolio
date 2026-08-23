@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { Link, NavLink, useLocation } from "react-router-dom"
-import { Menu } from "lucide-react"
+import { Icon } from "@iconify/react"
+import menuIcon from "@iconify-icons/ph/list-fill"
 
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
@@ -44,7 +45,7 @@ export function Navbar() {
   // (see the inverse-* tokens in index.css), so the bar reads as a distinct
   // band regardless of dark/light mode.
   const desktopLinkClass =
-    "font-label-mono text-label-mono text-inverse-on-surface/70 transition-colors duration-300 hover:text-inverse-primary"
+    "font-label-mono text-label-mono text-inverse-on-surface transition-colors duration-300 hover:text-inverse-primary"
   const activeLinkClass = "text-inverse-primary"
 
   return (
@@ -95,7 +96,7 @@ export function Navbar() {
           className="text-inverse-on-surface transition-colors hover:text-inverse-primary md:hidden"
           onClick={() => setOpen(true)}
         >
-          <Menu className="size-7" />
+          <Icon icon={menuIcon} className="size-7" />
         </button>
       </div>
 

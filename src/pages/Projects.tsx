@@ -15,7 +15,7 @@ export default function Projects() {
           <p className="font-body-lg text-body-lg text-on-surface-variant">
             A fuller list of projects than fits on the homepage — research
             work, personal tools, and a few still in progress. Each one notes
-            its stack, status, and a link to source or case study where one
+            its stack, status, and a link to source or blueprint where one
             exists.
           </p>
         </header>

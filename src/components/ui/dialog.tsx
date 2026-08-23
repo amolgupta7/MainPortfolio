@@ -1,6 +1,7 @@
 import * as React from "react"
 import * as DialogPrimitive from "@radix-ui/react-dialog"
-import { X } from "lucide-react"
+import { Icon } from "@iconify/react"
+import xIcon from "@iconify-icons/ph/x-fill"
 
 import { cn } from "@/lib/utils"
 
@@ -43,7 +44,7 @@ const DialogContent = React.forwardRef<
       {children}
       {!hideClose && (
         <DialogPrimitive.Close className="absolute top-8 right-8 text-on-surface transition-colors hover:text-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-xs">
-          <X className="size-8" strokeWidth={1.5} />
+          <Icon icon={xIcon} className="size-8" />
           <span className="sr-only">Close</span>
         </DialogPrimitive.Close>
       )}

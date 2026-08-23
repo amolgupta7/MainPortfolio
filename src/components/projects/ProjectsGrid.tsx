@@ -1,4 +1,5 @@
-import { ExternalLink } from "lucide-react"
+import { Icon } from "@iconify/react"
+import externalLinkIcon from "@iconify-icons/ph/arrow-square-out-fill"
 import { Link } from "react-router-dom"
 
 import { TechTag } from "@/components/ui/TechTag"
@@ -7,18 +8,19 @@ import { cn } from "@/lib/utils"
 
 /** Same large-format alternating layout as the Photography gallery's
  * GalleryGrid, minus the scroll-reveal — project info should be visible
- * immediately, not hidden until scrolled into view. None of these projects
- * have a real screenshot yet (three don't have any built UI at all), so each
- * gets a small abstract, thematic cover graphic instead — clearly
- * decorative, not a claim of what the actual product looks like. */
+ * immediately, not hidden until scrolled into view. Every project gets the
+ * same size/treatment here — no single one is given visual priority.
+ * None of these projects have a real screenshot yet (three don't have any
+ * built UI at all), so each gets a small abstract, thematic cover graphic
+ * instead — clearly decorative, not a claim of what the actual product
+ * looks like. */
 
-function ProjectTile({ project, height }: { project: Project; height: string }) {
+function ProjectTile({ project }: { project: Project }) {
   const content = (
     <div
       className={cn(
-        "group relative overflow-hidden rounded border border-outline-variant/30 bg-surface-container-highest transition-colors",
-        project.repoUrl && "hover:border-primary/50",
-        height
+        "group relative h-[260px] w-full overflow-hidden rounded border border-outline-variant/30 bg-surface-container-highest transition-colors md:h-[340px]",
+        project.repoUrl && "hover:border-primary/50"
       )}
     >
       {project.image ? (
@@ -65,14 +67,12 @@ function ProjectMeta({ project }: { project: Project }) {
           {project.status === "wip" ? "Shipping" : "Shipped"}
         </span>
       </div>
-      {project.featured && (
-        <Link
-          to={`/case-study/${project.slug}`}
-          className="flex items-center gap-1 text-primary transition-colors hover:text-primary-container"
-        >
-          Case Study <ExternalLink className="size-3" />
-        </Link>
-      )}
+      <Link
+        to={`/blueprint/${project.slug}`}
+        className="flex items-center gap-1 text-primary transition-colors hover:text-primary-container"
+      >
+        Blueprint <Icon icon={externalLinkIcon} className="size-3" />
+      </Link>
       {project.repoUrl && (
         <a
           href={project.repoUrl}
@@ -80,7 +80,7 @@ function ProjectMeta({ project }: { project: Project }) {
           rel="noreferrer"
           className="flex items-center gap-1 text-primary transition-colors hover:text-primary-container"
         >
-          Source <ExternalLink className="size-3" />
+          Source <Icon icon={externalLinkIcon} className="size-3" />
         </a>
       )}
     </div>
@@ -88,30 +88,10 @@ function ProjectMeta({ project }: { project: Project }) {
 }
 
 export function ProjectsGrid() {
-  let sideIndex = 0
-
   return (
     <div className="flex flex-col gap-section-gap">
-      {projects.map((project) => {
-        if (project.featured) {
-          return (
-            <article key={project.slug} className="flex flex-col gap-gutter">
-              <ProjectTile project={project} height="h-[300px] md:h-[400px]" />
-              <div>
-                <h2 className="font-headline-md text-headline-md text-on-surface">
-                  {project.title}
-                </h2>
-                <p className="mt-2 max-w-2xl font-body-md text-body-md text-on-surface-variant">
-                  {project.description}
-                </p>
-                <ProjectMeta project={project} />
-              </div>
-            </article>
-          )
-        }
-
-        const reversed = sideIndex % 2 === 1
-        sideIndex++
+      {projects.map((project, index) => {
+        const reversed = index % 2 === 1
 
         return (
           <article
@@ -119,7 +99,7 @@ export function ProjectsGrid() {
             className="grid grid-cols-1 items-center gap-gutter md:grid-cols-12"
           >
             <div className={cn("md:col-span-7", reversed && "md:order-2")}>
-              <ProjectTile project={project} height="h-[240px] md:h-[320px]" />
+              <ProjectTile project={project} />
             </div>
             <div
               className={cn(

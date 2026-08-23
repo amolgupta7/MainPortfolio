@@ -1,21 +1,17 @@
+import { Icon } from "@iconify/react"
 import { motion } from "framer-motion"
-import { Briefcase, Code2, Mail, MapPin } from "lucide-react"
+import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
+import { brandIcons } from "@/components/ui/icons"
 import { site } from "@/data/site"
 import heroPhoto from "@/data/my_photo_2.jpeg"
-
-const socialLinks = [
-  { label: "GitHub", href: site.github, icon: Code2 },
-  { label: "LinkedIn", href: site.linkedin, icon: Briefcase },
-  { label: "Email", href: `mailto:${site.email}`, icon: Mail },
-]
 
 export function Hero() {
   return (
     <section
       id="hero"
-      className="mx-auto max-w-container-max px-margin-mobile pt-16 pb-16 md:px-margin-desktop md:pt-32 md:pb-section-gap"
+      className="mx-auto max-w-container-max px-margin-mobile pt-16 pb-8 md:px-margin-desktop md:pt-32 md:pb-16"
     >
       <div className="grid grid-cols-1 items-center gap-gutter md:grid-cols-12">
         <motion.div
@@ -48,36 +44,17 @@ export function Hero() {
               <a href="#projects">View My Work</a>
             </Button>
             <Button asChild variant="outline">
-              <a href={site.resumeUrl} download>
-                Download Résumé
-              </a>
-            </Button>
-            <Button asChild variant="ghost" className="sm:ml-4">
-              <a href="/contact" className="flex items-center gap-2">
+              <Link to="/contact" className="flex items-center gap-2">
                 Let&rsquo;s Connect <span aria-hidden="true">→</span>
-              </a>
+              </Link>
             </Button>
           </div>
 
-          <div className="mt-12 flex flex-wrap items-center gap-6 text-on-surface-variant">
-            {socialLinks.map(({ label, href, icon: Icon }) => (
-              <a
-                key={label}
-                href={href}
-                aria-label={label}
-                target={href.startsWith("http") ? "_blank" : undefined}
-                rel={href.startsWith("http") ? "noreferrer" : undefined}
-                className="transition-colors hover:text-on-surface"
-              >
-                <Icon className="size-5" strokeWidth={1.75} />
-              </a>
-            ))}
-            <div className="ml-4 flex items-center gap-2 border-l border-outline-variant/30 pl-4">
-              <MapPin className="size-4" strokeWidth={1.75} />
-              <span className="font-label-mono text-label-mono text-xs">
-                {site.location}
-              </span>
-            </div>
+          <div className="mt-12 flex items-center gap-2 text-on-surface-variant">
+            <Icon icon={brandIcons["Google Maps"]} className="size-4" />
+            <span className="font-label-mono text-label-mono text-xs">
+              {site.location}
+            </span>
           </div>
         </motion.div>
 

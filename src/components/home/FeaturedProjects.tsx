@@ -1,5 +1,6 @@
+import { Icon } from "@iconify/react"
+import folderOpenIcon from "@iconify-icons/ph/folder-open-fill"
 import { motion } from "framer-motion"
-import { ExternalLink, FolderGit2 } from "lucide-react"
 import { Link } from "react-router-dom"
 
 import { Card } from "@/components/ui/card"
@@ -7,11 +8,9 @@ import { TechTag } from "@/components/ui/TechTag"
 import { projects } from "@/data/projects"
 
 export function FeaturedProjects() {
-  const featured = projects.find((project) => project.featured)
-  // Same pattern as the Photography teaser below: one main piece, a couple
-  // more beneath it, then a tile that links out to the full page instead of
-  // trying to list everything here.
-  const preview = projects.filter((project) => !project.featured).slice(0, 2)
+  // No single project gets visual priority here — same card, same size,
+  // for everyone. Just the first three plus a tile linking to the rest.
+  const preview = projects.slice(0, 3)
 
   return (
     <section id="projects" className="border-t border-outline-variant/20">
@@ -21,58 +20,13 @@ export function FeaturedProjects() {
           Featured Work
         </h2>
 
-        {featured && (
-          <motion.div
-            initial={{ opacity: 0, y: 16 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-80px" }}
-            transition={{ duration: 0.5 }}
-          >
-            <Link
-              to={`/case-study/${featured.slug}`}
-              className="group mb-8 block overflow-hidden rounded-xl border border-outline-variant/20 bg-surface shadow-lg transition-colors hover:border-primary/40"
-            >
-              <div className="relative aspect-video w-full overflow-hidden">
-                {featured.image ? (
-                  <img
-                    src={featured.image}
-                    alt={featured.imageAlt}
-                    className="size-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                ) : (
-                  <div className="flex size-full items-center justify-center bg-surface-container-highest">
-                    <span className="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">
-                      {featured.title}
-                    </span>
-                  </div>
-                )}
-                <div className="absolute inset-0 bg-gradient-to-t from-surface via-transparent to-transparent" />
-              </div>
-              <div className="p-6">
-                <div className="mb-2 flex items-start justify-between gap-4">
-                  <h3 className="font-headline-sm text-body-lg font-semibold text-on-surface">
-                    {featured.title}
-                  </h3>
-                  <ExternalLink className="size-5 shrink-0 text-on-surface-variant" />
-                </div>
-                <p className="mb-4 font-body-md text-sm text-on-surface-variant">
-                  {featured.description}
-                </p>
-                <div className="flex gap-2">
-                  {featured.tags.map((tag) => (
-                    <TechTag
-                      key={tag}
-                      tag={tag}
-                      className="rounded-xs bg-primary/10 px-2 py-1 font-label-mono text-[10px] text-primary"
-                    />
-                  ))}
-                </div>
-              </div>
-            </Link>
-          </motion.div>
-        )}
-
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
+        <motion.div
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-80px" }}
+          transition={{ duration: 0.5 }}
+          className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4"
+        >
           {preview.map((project) => (
             <Card
               key={project.slug}
@@ -114,12 +68,15 @@ export function FeaturedProjects() {
             to="/projects"
             className="group flex aspect-video cursor-pointer flex-col items-center justify-center gap-2 rounded-md border border-outline-variant/20 bg-surface-container transition-colors hover:bg-surface-container-high sm:aspect-auto"
           >
-            <FolderGit2 className="size-6 text-primary transition-transform group-hover:scale-110" />
+            <Icon
+              icon={folderOpenIcon}
+              className="size-6 text-primary transition-transform group-hover:scale-110"
+            />
             <span className="font-label-mono text-[11px] uppercase tracking-widest text-on-surface-variant">
               View All Projects
             </span>
           </Link>
-        </div>
+        </motion.div>
       </div>
     </section>
   )

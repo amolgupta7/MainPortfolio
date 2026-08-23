@@ -1,5 +1,8 @@
+import { Icon } from "@iconify/react"
 import { motion } from "framer-motion"
 
+import { brandIcons } from "@/components/ui/icons"
+import { TechTag } from "@/components/ui/TechTag"
 import { coreTechnologies, experience } from "@/data/experience"
 
 export function Experience() {
@@ -38,7 +41,10 @@ export function Experience() {
               <h3 className="font-body-lg font-medium text-body-lg text-on-surface">
                 {item.role}
               </h3>
-              <span className="mb-2 block font-label-mono text-label-mono text-on-surface-variant">
+              <span className="mb-2 flex items-center gap-2 font-label-mono text-label-mono text-on-surface-variant">
+                {item.company.includes("Visa") && (
+                  <Icon icon={brandIcons.Visa} className="h-3 w-auto shrink-0" />
+                )}
                 {item.company}
               </span>
               {item.description && (
@@ -60,7 +66,7 @@ export function Experience() {
                 key={tech}
                 className="rounded-md border border-outline-variant/30 bg-surface-container px-3 py-1 font-label-mono text-[11px] text-on-surface"
               >
-                {tech}
+                <TechTag tag={tech} />
               </li>
             ))}
           </ul>

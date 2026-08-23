@@ -1,6 +1,6 @@
-import { caseStudy, tableOfContents } from "@/data/caseStudy"
+import { tableOfContents } from "@/data/blueprint"
 
-export function TableOfContents() {
+export function TableOfContents({ team }: { team: string[] }) {
   return (
     <div className="relative col-span-4 hidden md:block">
       <div className="sticky top-24 space-y-8 border-l border-outline-variant/30 pl-gutter">
@@ -8,7 +8,7 @@ export function TableOfContents() {
           <h4 className="mb-4 font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">
             Contents
           </h4>
-          <nav className="flex flex-col space-y-3 text-sm" aria-label="Case study sections">
+          <nav className="flex flex-col space-y-3 text-sm" aria-label="Blueprint sections">
             {tableOfContents.map((item, index) => (
               <a
                 key={item.id}
@@ -29,7 +29,7 @@ export function TableOfContents() {
             Team
           </h4>
           <ul className="space-y-2 text-sm text-on-surface-variant">
-            {caseStudy.team.map((member) => (
+            {team.map((member) => (
               <li key={member}>{member}</li>
             ))}
           </ul>

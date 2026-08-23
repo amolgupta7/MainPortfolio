@@ -1,22 +1,24 @@
-import { Blocks, Database } from "lucide-react"
-import type { LucideIcon } from "lucide-react"
+import { Icon } from "@iconify/react"
+import type { IconifyIcon } from "@iconify/types"
+import cubeIcon from "@iconify-icons/ph/cube-fill"
+import databaseIcon from "@iconify-icons/ph/database-fill"
 
-import { caseStudy } from "@/data/caseStudy"
+import type { BlueprintDecision } from "@/data/blueprint"
 
-const icons: Record<string, LucideIcon> = {
-  architecture: Blocks,
-  storage: Database,
+const icons: Record<string, IconifyIcon> = {
+  architecture: cubeIcon,
+  storage: databaseIcon,
 }
 
-export function DecisionsList() {
+export function DecisionsList({ decisions }: { decisions: BlueprintDecision[] }) {
   return (
     <ul className="space-y-6">
-      {caseStudy.decisions.map((decision) => {
-        const Icon = icons[decision.icon]
+      {decisions.map((decision) => {
+        const icon = icons[decision.icon]
         return (
           <li key={decision.title} className="flex gap-4">
             <div className="flex size-8 shrink-0 items-center justify-center rounded-full bg-primary-container/20">
-              {Icon && <Icon className="size-4 text-primary" strokeWidth={1.75} />}
+              {icon && <Icon icon={icon} className="size-4 text-primary" />}
             </div>
             <div>
               <h4 className="mb-1 font-headline-sm text-headline-sm text-on-surface">

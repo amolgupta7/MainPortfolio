@@ -1,12 +1,10 @@
-import { Link } from "react-router-dom"
-
+import { SocialIcon } from "@/components/ui/SocialIcon"
 import { site } from "@/data/site"
 
 const footerLinks = [
   { label: "GitHub", href: site.github },
   { label: "LinkedIn", href: site.linkedin },
   { label: "Email", href: `mailto:${site.email}` },
-  { label: "Photography", href: "/gallery", internal: true },
 ]
 
 export function Footer() {
@@ -26,27 +24,18 @@ export function Footer() {
           className="flex flex-wrap justify-center gap-6"
           aria-label="Footer"
         >
-          {footerLinks.map((link) =>
-            link.internal ? (
-              <Link
-                key={link.label}
-                to={link.href}
-                className="rounded-xs font-label-mono text-label-mono text-inverse-on-surface/70 transition-colors hover:text-inverse-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inverse-primary"
-              >
-                {link.label}
-              </Link>
-            ) : (
-              <a
-                key={link.label}
-                href={link.href}
-                className="rounded-xs font-label-mono text-label-mono text-inverse-on-surface/70 transition-colors hover:text-inverse-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inverse-primary"
-                target={link.href.startsWith("http") ? "_blank" : undefined}
-                rel={link.href.startsWith("http") ? "noreferrer" : undefined}
-              >
-                {link.label}
-              </a>
-            )
-          )}
+          {footerLinks.map((link) => (
+            <a
+              key={link.label}
+              href={link.href}
+              aria-label={link.label}
+              className="rounded-xs text-inverse-on-surface/70 transition-colors hover:text-inverse-primary focus:outline-none focus-visible:ring-2 focus-visible:ring-inverse-primary"
+              target={link.href.startsWith("http") ? "_blank" : undefined}
+              rel={link.href.startsWith("http") ? "noreferrer" : undefined}
+            >
+              <SocialIcon label={link.label} className="size-7" />
+            </a>
+          ))}
         </nav>
       </div>
     </footer>
