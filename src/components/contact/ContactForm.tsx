@@ -126,7 +126,7 @@ export function ContactForm() {
             <input
               id="email"
               name="email"
-              // type="email"
+              type="email"
               required
               placeholder="jane@example.com"
               className={inputClass}
