@@ -1,5 +1,5 @@
 import { Icon } from "@iconify/react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { Link } from "react-router-dom"
 
 import { Button } from "@/components/ui/button"
@@ -8,6 +8,8 @@ import { site } from "@/data/site"
 import heroPhoto from "@/data/my_photo_2.jpeg"
 
 export function Hero() {
+  const reduceMotion = useReducedMotion()
+
   return (
     <section
       id="hero"
@@ -15,7 +17,7 @@ export function Hero() {
     >
       <div className="grid grid-cols-1 items-center gap-gutter md:grid-cols-12">
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="flex flex-col items-start md:col-span-8"
@@ -70,7 +72,7 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, scale: 0.96 }}
+          initial={reduceMotion ? false : { opacity: 0, scale: 0.96 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.7, ease: "easeOut", delay: 0.15 }}
           className="hidden h-[500px] md:col-span-4 md:block"

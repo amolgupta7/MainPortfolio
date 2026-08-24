@@ -28,8 +28,7 @@ function getInitialTheme(): Theme {
 /**
  * Fixed, global dark/light toggle. Flips `data-theme` on <html>, which the
  * CSS in index.css uses to invert the site's color tokens: pages that are
- * normally dark become light and vice versa (see the `.theme-light`
- * overrides for the Photography/Contact pages).
+ * normally dark become light and vice versa.
  */
 export function ThemeToggle() {
   const [theme, setTheme] = useState<Theme>(getInitialTheme)

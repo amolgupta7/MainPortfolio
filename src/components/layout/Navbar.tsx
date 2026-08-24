@@ -6,7 +6,7 @@ import menuIcon from "@iconify-icons/ph/list-fill"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { homeNavLinks, pageNavLinks, site } from "@/data/site"
-import { cn } from "@/lib/utils"
+import { cn, preferredScrollBehavior } from "@/lib/utils"
 
 function SectionLink({
   hash,
@@ -24,7 +24,9 @@ function SectionLink({
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === "/") {
       event.preventDefault()
-      document.getElementById(hash)?.scrollIntoView({ behavior: "smooth" })
+      document
+        .getElementById(hash)
+        ?.scrollIntoView({ behavior: preferredScrollBehavior() })
       window.history.pushState(null, "", `#${hash}`)
     }
     onNavigate?.()

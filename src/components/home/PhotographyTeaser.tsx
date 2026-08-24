@@ -1,6 +1,6 @@
 import { Icon } from "@iconify/react"
 import cameraIcon from "@iconify-icons/ph/camera-fill"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { Link } from "react-router-dom"
 
 import { photos } from "@/data/photography"
@@ -8,6 +8,8 @@ import { photos } from "@/data/photography"
 const preview = photos.slice(0, 3)
 
 export function PhotographyTeaser() {
+  const reduceMotion = useReducedMotion()
+
   return (
     <section className="border-t border-outline-variant/20">
       <div className="mx-auto max-w-container-max px-margin-mobile py-16 md:px-margin-desktop md:py-section-gap">
@@ -17,7 +19,7 @@ export function PhotographyTeaser() {
         </h2>
 
         <motion.div
-          initial={{ opacity: 0, y: 16 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}

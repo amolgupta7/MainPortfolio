@@ -1,11 +1,13 @@
 import { Icon } from "@iconify/react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
 import { brandIcons } from "@/components/ui/icons"
 import { TechTag } from "@/components/ui/TechTag"
 import { coreTechnologies, experience } from "@/data/experience"
 
 export function Experience() {
+  const reduceMotion = useReducedMotion()
+
   return (
     <section
       id="experience"
@@ -21,7 +23,7 @@ export function Experience() {
           {experience.map((item, index) => (
             <motion.li
               key={item.role}
-              initial={{ opacity: 0, x: -12 }}
+              initial={reduceMotion ? false : { opacity: 0, x: -12 }}
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, margin: "-80px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}

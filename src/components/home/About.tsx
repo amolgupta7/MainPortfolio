@@ -1,4 +1,4 @@
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
 import { aboutStats } from "@/data/experience"
 
@@ -9,6 +9,8 @@ const paragraphs = [
 ]
 
 export function About() {
+  const reduceMotion = useReducedMotion()
+
   return (
     <section
       id="about"
@@ -21,7 +23,7 @@ export function About() {
 
       <div className="grid grid-cols-1 gap-gutter md:grid-cols-12">
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5 }}
@@ -33,7 +35,7 @@ export function About() {
         </motion.div>
 
         <motion.div
-          initial={{ opacity: 0, y: 12 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-80px" }}
           transition={{ duration: 0.5, delay: 0.1 }}

@@ -5,7 +5,7 @@ import { PageLayout } from "@/components/layout/PageLayout"
 
 export default function NotFound() {
   return (
-    <PageLayout>
+    <PageLayout showTechnicalGrid={false}>
       <div className="mx-auto flex max-w-container-max flex-col items-center justify-center px-margin-mobile py-32 text-center md:px-margin-desktop">
         <span className="mb-4 font-label-mono text-label-mono text-primary">
           404

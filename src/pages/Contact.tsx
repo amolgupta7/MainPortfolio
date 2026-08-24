@@ -1,12 +1,10 @@
 import { PageLayout } from "@/components/layout/PageLayout"
-import { TechnicalGrid } from "@/components/layout/TechnicalGrid"
 import { ContactForm } from "@/components/contact/ContactForm"
 import { ContactSidebar } from "@/components/contact/ContactSidebar"
 
 export default function Contact() {
   return (
     <PageLayout>
-      <TechnicalGrid />
       <div className="mx-auto max-w-container-max px-margin-mobile py-16 md:px-margin-desktop md:py-section-gap">
         <div className="mb-16 max-w-3xl md:mb-24">
           <div className="mb-6 inline-flex items-center gap-2 font-label-mono text-label-mono text-primary">

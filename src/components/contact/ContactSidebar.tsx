@@ -41,9 +41,9 @@ export function ContactSidebar() {
             <span className="relative inline-flex size-3 rounded-full bg-primary" />
           </span>
           <div>
-            <h3 className="mb-2 font-label-mono text-label-mono uppercase text-on-surface">
+            <h2 className="mb-2 font-label-mono text-label-mono uppercase text-on-surface">
               Current Status
-            </h3>
+            </h2>
             <p className="font-body-md text-body-md text-on-surface-variant">
               Currently employed full-time as a Senior Software Engineer at
               Visa. Open to hearing about interesting opportunities and
@@ -54,9 +54,9 @@ export function ContactSidebar() {
       </div>
 
       <div className="glass-panel flex-grow rounded-lg p-6">
-        <h3 className="mb-6 border-b border-outline-variant/30 pb-2 font-label-mono text-label-mono uppercase text-on-surface">
+        <h2 className="mb-6 border-b border-outline-variant/30 pb-2 font-label-mono text-label-mono uppercase text-on-surface">
           Connect
-        </h3>
+        </h2>
         <ul className="space-y-4">
           {links.map(({ label, value, href, iconLabel }) => (
             <li key={label}>

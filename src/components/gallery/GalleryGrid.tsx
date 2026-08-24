@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
 import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
 import { photos, type PhotoItem } from "@/data/photography"
@@ -39,17 +39,18 @@ function MonolithImage({ photo, onOpen }: { photo: PhotoItem; onOpen: () => void
 
 export function GalleryGrid() {
   const [active, setActive] = useState<PhotoItem | null>(null)
+  const reduceMotion = useReducedMotion()
   let sideIndex = 0
 
   return (
     <>
       <div className="flex flex-col gap-section-gap">
         {photos.map((photo) => {
-          if (photo.span === "featured") {
+          if (photo.featured) {
             return (
               <motion.article
                 key={photo.id}
-                initial={{ opacity: 0, y: 50 }}
+                initial={reduceMotion ? false : { opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8, ease: revealEase }}
@@ -86,7 +87,7 @@ export function GalleryGrid() {
           return (
             <motion.article
               key={photo.id}
-              initial={{ opacity: 0, y: 50 }}
+              initial={reduceMotion ? false : { opacity: 0, y: 50 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
               transition={{ duration: 0.8, ease: revealEase }}

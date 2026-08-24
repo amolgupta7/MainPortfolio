@@ -21,21 +21,25 @@ export function ContactForm() {
   >("idle");
   const [time, setTime] = useState(5);
 
-  // Ticks the countdown down once per second while the success message is
-  // showing, then resets the form back to idle (and the timer back to 5,
-  // ready for next time) once it hits 0.
+  // Keep the countdown and form reset tied to the success state so both
+  // timers are cleaned up if the component unmounts.
   useEffect(() => {
     if (status !== "sent") return;
 
-    if (time <= 0) {
+    const countdownTimer = setInterval(
+      () => setTime((current) => Math.max(current - 1, 0)),
+      1000,
+    );
+    const resetTimer = setTimeout(() => {
       setStatus("idle");
       setTime(5);
-      return;
-    }
+    }, 5000);
 
-    const timer = setTimeout(() => setTime((current) => current - 1), 1000);
-    return () => clearTimeout(timer);
-  }, [status, time]);
+    return () => {
+      clearInterval(countdownTimer);
+      clearTimeout(resetTimer);
+    };
+  }, [status]);
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -65,6 +69,7 @@ export function ContactForm() {
       });
       const result = await response.json();
       if (result.success) {
+        setTime(5);
         setStatus("sent");
         form.reset();
       } else {
@@ -90,7 +95,7 @@ export function ContactForm() {
           Thanks for reaching out — I&rsquo;ll get back to you shortly.
         </p>
         <p className="mt-2 font-body-md text-body-md text-on-surface-variant">
-          Redirecting back in {time}s
+          Form resets in {time}s
         </p>
       </div>
     );
@@ -188,6 +193,7 @@ export function ContactForm() {
 
         <div className="flex flex-col items-start gap-4 pt-4 sm:flex-row sm:items-center sm:justify-between">
           <p
+            role="alert"
             className={
               "max-w-[260px] font-label-mono text-label-mono text-xs sm:max-w-none text-error"
             }
