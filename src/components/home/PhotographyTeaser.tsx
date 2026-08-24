@@ -7,7 +7,7 @@ import { Link } from "react-router-dom"
 
 import { photos, type PhotoItem } from "@/data/photography"
 
-const ROTATE_INTERVAL_MS = 3000
+const ROTATE_INTERVAL_MS = 5000
 
 /** Fisher-Yates shuffle — returns a new array instead of mutating its
  * input (unlike `array.sort(() => Math.random() - 0.5)`, which both
@@ -77,7 +77,7 @@ export function PhotographyTeaser() {
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   exit={{ opacity: 0 }}
-                  transition={{ duration: 1, ease: "easeInOut" }}
+                  transition={{ duration: 2, ease: "easeInOut" }}
                   className="absolute inset-0"
                 >
                   <Link
