@@ -16,12 +16,10 @@ interface LockedContentProps {
   compact?: boolean
 }
 
-/** Wraps work-in-progress content behind a blurred white glass layer with a
- * lock icon, so the underlying implementation details of a still-shipping
- * project aren't easily read or copied off the page. The real content stays
- * in the DOM (nothing to fake here) but is visually obscured and marked
- * non-interactive/non-selectable. Renders children untouched when `locked`
- * is false. */
+/** Adds a visual "coming soon" treatment to work-in-progress content.
+ * This is a presentation component, not a security boundary: its children
+ * remain in the client bundle and DOM. Renders children normally when
+ * `locked` is false. */
 export function LockedContent({
   locked,
   children,
@@ -30,7 +28,7 @@ export function LockedContent({
   compact = false,
 }: LockedContentProps) {
   if (!locked) {
-    return <>{children}</>
+    return <div className={className}>{children}</div>
   }
 
   return (

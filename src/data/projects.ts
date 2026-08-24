@@ -5,8 +5,8 @@ import hopeSpeechImg from "@/assets/projects/hope-speech-detection.svg"
 import mainPortfolioImg from "@/assets/projects/main-portfolio.svg"
 import portfolioV1Img from "@/assets/projects/portfolio-v1.svg"
 
-export interface Project {
-  slug: string
+export interface Project<Slug extends string = string> {
+  slug: Slug
   title: string
   description: string
   tags: string[]
@@ -14,19 +14,21 @@ export interface Project {
   imageAlt: string
   featured?: boolean
   repoUrl?: string
-  /** Set on projects that are still being built — shown as a "Work in
-   * Progress" badge instead of a finished-project claim. */
-  status?: "wip"
+  status: "wip" | "shipped"
+}
+
+function defineProjects<const Slug extends string>(items: Project<Slug>[]) {
+  return items
 }
 
 // Newest first, oldest last.
-export const projects: Project[] = [
+export const projects = defineProjects([
   {
     slug: "candlecraft",
     title: "CandleCraft",
     description:
-      "An automated intraday trading system that scans candlestick patterns and technical indicators on Indian equities/ETFs, executes trades through broker APIs with dynamic stop-loss and position sizing, and backtests strategies against historical data before going live.",
-    tags: ["React", "TypeScript", "Node.js", "PostgreSQL", "WebSockets"],
+      "Project details are being finalized and aren't public yet — check back once this one ships.",
+    tags: [],
     image: candlecraftImg,
     imageAlt:
       "Abstract cover art of a candlestick trading chart, alternating blue and orange candles over a faint moving-average line.",
@@ -36,8 +38,8 @@ export const projects: Project[] = [
     slug: "quiteApply",
     title: "QuietApply",
     description:
-      "Automates the tedious parts of job hunting — pulls listings from job boards and career pages, matches them against your résumé and preferences, auto-fills applications, and tracks status (applied/interview/rejected) on one dashboard.",
-    tags: ["React", "TypeScript", "Playwright", "Node.js", "PostgreSQL"],
+      "Project details are being finalized and aren't public yet — check back once this one ships.",
+    tags: [],
     image: hirejetImg,
     imageAlt:
       "Abstract cover art of a three-column kanban board narrowing from many cards to few, representing an application pipeline funnel.",
@@ -47,8 +49,8 @@ export const projects: Project[] = [
     slug: "grocerrace",
     title: "GrocerRace",
     description:
-      "Real-time price comparison across quick-commerce apps (Zepto, Blinkit, Instamart) — normalizes listings across platforms, ranks results by price/delivery time/fees, and caches lookups for speed.",
-    tags: ["React", "TypeScript", "Node.js", "Redis", "Elasticsearch"],
+      "Project details are being finalized and aren't public yet — check back once this one ships.",
+    tags: [],
     image: grocerraceImg,
     imageAlt:
       "Abstract cover art of three race lanes of differing lengths with arrow tips, representing a delivery-speed comparison.",
@@ -64,6 +66,7 @@ export const projects: Project[] = [
     imageAlt:
       "Abstract cover art of a layered browser-window wireframe, suggesting a website under active revision.",
     repoUrl: "https://github.com/amolgupta7/MainPortfolio",
+    status: "shipped",
   },
   {
     slug: "portfolio-v1",
@@ -75,6 +78,7 @@ export const projects: Project[] = [
     imageAlt:
       "Abstract cover art of a single plain page wireframe, simpler than the current site's layout.",
     repoUrl: "https://github.com/amolgupta7/Portfolio",
+    status: "shipped",
   },
   {
     slug: "hope-speech-detection",
@@ -87,5 +91,8 @@ export const projects: Project[] = [
       "Abstract cover art of a three-layer neural network graph, nodes fully connected between layers.",
     featured: true,
     repoUrl: "https://github.com/amolgupta7/Hope-Speech-Detection",
+    status: "shipped",
   },
-]
+])
+
+export type ProjectSlug = (typeof projects)[number]["slug"]

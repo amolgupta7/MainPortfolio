@@ -1,12 +1,14 @@
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 
 export function ResultsGrid({ results }: { results: { value: string; label: string }[] }) {
+  const reduceMotion = useReducedMotion()
+
   return (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
       {results.map((result, index) => (
         <motion.div
           key={result.label}
-          initial={{ opacity: 0, y: 12 }}
+          initial={reduceMotion ? false : { opacity: 0, y: 12 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-40px" }}
           transition={{ duration: 0.4, delay: index * 0.08 }}

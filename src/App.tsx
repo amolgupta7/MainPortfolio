@@ -46,7 +46,7 @@ function App() {
   return (
     <>
       <RouteProgress active={isPending} />
-      <ScrollToTop />
+      <ScrollToTop location={displayLocation} />
       <ThemeToggle />
       <Suspense fallback={<PageLoading />}>
         <Routes location={displayLocation}>

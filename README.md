@@ -7,7 +7,7 @@
 Amol Gupta's personal portfolio site, originally scaffolded from the
 ["Technical Precision"](https://stitch.withgoogle.com) design system created
 in Google Stitch, then filled in with real content: résumé-backed copy,
-GitHub project data, and a personal photography gallery. Dark, high-contrast,
+project data, and a personal photography gallery. Dark, high-contrast,
 engineering-grade aesthetic by default — Geist for display type, Inter for
 body copy, JetBrains Mono for labels, and a single electric-blue accent
 (`#adc6ff`) on near-black surfaces, with a full light-mode counterpart.
@@ -23,20 +23,20 @@ body copy, JetBrains Mono for labels, and a single electric-blue accent
 | Components | [shadcn/ui](https://ui.shadcn.com) pattern | hand-rolled on Radix primitives (`Button`, `Card`, `Dialog`), used only where real interactivity is needed (nav menu, lightbox) |
 | Icons | [Iconify](https://iconify.design) (`@iconify/react` + offline `@iconify-icons/*` data packages) | the *only* icon source in this codebase — Phosphor (`ph`) for structural UI icons, Simple Icons + the `logos` collection for real brand marks (GitHub, LinkedIn, WhatsApp, Gmail, Visa, tech-stack tags). Bundled at build time, no runtime calls to Iconify's API |
 | Forms | [Web3Forms](https://web3forms.com) | contact form submissions POST directly to Web3Forms' API and land in your inbox — no backend of your own. Needs `VITE_WEB3FORMS_ACCESS_KEY` set (see [Setup](#setup)) |
-| Routing | [React Router v7](https://reactrouter.com) | 4 routes — see below |
-| Animation | [Framer Motion](https://motion.dev) | scroll-reveal across the site; the Photography grid additionally uses a clip-path "curtain" reveal, a flicker-in caption, and a refined hover-zoom/desaturate curve, ported from Stitch's "Photography Gallery - Immersive Motion" screen |
+| Routing | [React Router v7](https://reactrouter.com) | 5 public route patterns plus a not-found fallback — see below |
+| Animation | [Framer Motion](https://motion.dev) | entrance and scroll-reveal effects with reduced-motion support, plus subtle image hover treatments |
 | Theming | CSS custom properties + `data-theme` | fixed bottom-right toggle (`ThemeToggle`) flips the whole site between dark (default) and light by swapping the same M3-style color tokens at `:root` |
-| Image prep | [sharp](https://sharp.pixelplumbing.com) (dev-only) | one-off resizing/compression of the source photography before committing it to `src/assets/` — not used at runtime |
 
 ### Why these routes
 
 The Stitch project contained 5 finalized screens. Two of them ("About/Experience/Projects"
 sections) only ever appeared as anchor-scrolled sections on the homepage, while
-**Photography** and **Contact** were designed as full standalone pages with
+**Projects**, **Photography**, and **Contact** are full standalone pages with
 their own nav/header treatment — so that's how they're implemented:
 
 - `/` — Home (Hero → About → Experience → Featured Projects → Photography teaser)
-- `/blueprint/:slug` — Project detail page (currently: `hope-speech-detection`)
+- `/projects` — Full project list
+- `/blueprint/:slug` — Project detail page, backed by the matching project slug
 - `/gallery` — Full photography gallery with a lightbox
 - `/contact` — Contact form + availability/social sidebar
 
@@ -79,7 +79,8 @@ npm run lint      # oxlint
 ```
 src/
 ├─ assets/
-│  └─ photography/     # real photos (01.jpg … 16.jpg), resized/compressed with sharp
+│  ├─ photography/     # real photos (01.jpg … 16.jpg), optimized before commit
+│  └─ projects/        # local project cover artwork
 ├─ components/
 │  ├─ ui/              # shadcn-style primitives: Button, Card, Dialog
 │  ├─ layout/           # Navbar, Footer, PageLayout, TechnicalGrid, ScrollToTop, ThemeToggle

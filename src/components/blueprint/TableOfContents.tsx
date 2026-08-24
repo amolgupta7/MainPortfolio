@@ -5,9 +5,9 @@ export function TableOfContents({ team }: { team: string[] }) {
     <div className="relative col-span-4 hidden md:block">
       <div className="sticky top-24 space-y-8 border-l border-outline-variant/30 pl-gutter">
         <div>
-          <h4 className="mb-4 font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">
+          <h2 className="mb-4 font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">
             Contents
-          </h4>
+          </h2>
           <nav className="flex flex-col space-y-3 text-sm" aria-label="Blueprint sections">
             {tableOfContents.map((item, index) => (
               <a
@@ -25,9 +25,9 @@ export function TableOfContents({ team }: { team: string[] }) {
           </nav>
         </div>
         <div className="border-t border-outline-variant/30 pt-8">
-          <h4 className="mb-4 font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">
+          <h2 className="mb-4 font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">
             Team
-          </h4>
+          </h2>
           <ul className="space-y-2 text-sm text-on-surface-variant">
             {team.map((member) => (
               <li key={member}>{member}</li>

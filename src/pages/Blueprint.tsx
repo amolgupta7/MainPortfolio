@@ -16,15 +16,15 @@ import { projects } from "@/data/projects"
 export default function Blueprint() {
   const { slug } = useParams()
   const project = projects.find((item) => item.slug === slug)
-  const data = slug ? blueprints[slug] : undefined
 
-  if (!project || !data) {
+  if (!project) {
     return <Navigate to="/projects" replace />
   }
 
-  // Work-in-progress projects get their write-up blurred out behind a lock —
-  // the implementation is still unique/unshipped, so it isn't shown in full.
-  const isWip = project.status === "wip"
+  // WIP projects have no blueprint entry at all — there's no real case
+  // study to show yet, so `data` is undefined and the page below renders a
+  // title-only locked placeholder instead.
+  const data = blueprints[project.slug]
 
   // Cycle to whichever project comes next in the list, wrapping back to the
   // start — a real link instead of a placeholder "next project" name.
@@ -46,56 +46,69 @@ export default function Blueprint() {
             Back to Projects
           </Link>
           <div className="font-label-mono text-label-mono  text-inverse-on-surface">
-            {data.code}
+            {data ? data.code : "SHIPPING"}
           </div>
         </div>
       </header>
 
       <main className="relative flex-1 pt-16 pb-section-gap md:pt-32">
-        <BlueprintHero data={data} />
+        {data ? (
+          <>
+            <BlueprintHero data={data} project={project} />
 
-        <div className="mx-auto grid max-w-container-max grid-cols-1 gap-gutter px-margin-mobile md:grid-cols-12 md:px-margin-desktop">
-          <LockedContent
-            locked={isWip}
-            className="col-span-1 space-y-16 md:col-span-8 md:space-y-24"
-            message="This project is still in active development — implementation details stay private until it ships."
-          >
-            <Section id="overview" title="01. Overview">
-              <div className="space-y-4 font-body-md text-body-md text-on-surface-variant">
-                {data.overview.map((paragraph) => (
-                  <p key={paragraph}>{paragraph}</p>
-                ))}
+            <div className="mx-auto grid max-w-container-max grid-cols-1 gap-gutter px-margin-mobile md:grid-cols-12 md:px-margin-desktop">
+              <div className="col-span-1 space-y-16 md:col-span-8 md:space-y-24">
+                <Section id="overview" title="01. Overview">
+                  <div className="space-y-4 font-body-md text-body-md text-on-surface-variant">
+                    {data.overview.map((paragraph) => (
+                      <p key={paragraph}>{paragraph}</p>
+                    ))}
+                  </div>
+                </Section>
+
+                <Section id="problem" title="02. Problem & Users">
+                  <ProblemGrid problems={data.problems} />
+                </Section>
+
+                <Section id="architecture" title="03. System Architecture">
+                  <p className="mb-8 font-body-md text-body-md text-on-surface-variant">
+                    {data.architectureDescription}
+                  </p>
+                  <div className="relative mb-8 aspect-video w-full overflow-hidden rounded-md border border-outline-variant/20 bg-surface-container">
+                    <div className="flex size-full items-center justify-center bg-surface-container-highest">
+                      <span className="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">
+                        {project.title}
+                      </span>
+                    </div>
+                  </div>
+                </Section>
+
+                <Section id="decisions" title="04. Technical Decisions">
+                  <DecisionsList decisions={data.decisions} />
+                </Section>
+
+                <Section id="results" title="05. Results & Impact">
+                  <ResultsGrid results={data.results} />
+                </Section>
               </div>
-            </Section>
 
-            <Section id="problem" title="02. Problem & Users">
-              <ProblemGrid problems={data.problems} />
-            </Section>
-
-            <Section id="architecture" title="03. System Architecture">
-              <p className="mb-8 font-body-md text-body-md text-on-surface-variant">
-                {data.architectureDescription}
-              </p>
-              <div className="relative mb-8 aspect-video w-full overflow-hidden rounded-md border border-outline-variant/20 bg-surface-container">
-                <div className="flex size-full items-center justify-center bg-surface-container-highest">
-                  <span className="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant">
-                    {data.title}
-                  </span>
-                </div>
-              </div>
-            </Section>
-
-            <Section id="decisions" title="04. Technical Decisions">
-              <DecisionsList decisions={data.decisions} />
-            </Section>
-
-            <Section id="results" title="05. Results & Impact">
-              <ResultsGrid results={data.results} />
-            </Section>
-          </LockedContent>
-
-          <TableOfContents team={data.team} />
-        </div>
+              <TableOfContents team={data.team} />
+            </div>
+          </>
+        ) : (
+          <div className="mx-auto max-w-container-max px-margin-mobile md:px-margin-desktop">
+            <h1 className="mb-8 font-display-lg-mobile text-display-lg-mobile text-on-surface md:font-display-lg md:text-display-lg">
+              {project.title}
+            </h1>
+            <LockedContent
+              locked
+              className="rounded-md"
+              message="This project is still in active development — the full case study will be published when it ships."
+            >
+              <div className="min-h-[50vh] w-full rounded-md border border-outline-variant/20 bg-surface-container" />
+            </LockedContent>
+          </div>
+        )}
       </main>
 
       <div className="border-t border-outline-variant/20 bg-surface-container-lowest pt-16">

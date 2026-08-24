@@ -1,7 +1,9 @@
 # Assets
 
-Local, bundled images/fonts go here (e.g. `import logo from "@/assets/logo.svg"`).
+Local, bundled images and fonts go here (for example,
+`import logo from "@/assets/logo.svg"`).
 
-Photography and blueprint imagery currently comes from the Stitch design's
-placeholder image URLs (see `src/data/*.ts`) rather than local files — replace
-those `image` fields with imports from this folder once you have final assets.
+- `photography/` contains the numbered gallery JPEGs in display order.
+- `projects/` contains the local SVG cover artwork used by project cards.
+
+Asset imports are connected to their metadata in `src/data/*.ts`.

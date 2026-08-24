@@ -21,9 +21,9 @@ export function DecisionsList({ decisions }: { decisions: BlueprintDecision[] })
               {icon && <Icon icon={icon} className="size-4 text-primary" />}
             </div>
             <div>
-              <h4 className="mb-1 font-headline-sm text-headline-sm text-on-surface">
+              <h3 className="mb-1 font-headline-sm text-headline-sm text-on-surface">
                 {decision.title}
-              </h4>
+              </h3>
               <p className="font-body-md text-sm text-on-surface-variant">
                 {decision.description}
               </p>

@@ -20,32 +20,18 @@ function ProjectTile({ project }: { project: Project }) {
   const isWip = project.status === "wip"
 
   const content = (
-    <LockedContent
-      locked={isWip}
-      compact
-      className="h-[260px] w-full overflow-hidden rounded md:h-[340px]"
+    <div
+      className={cn(
+        "group relative h-[260px] w-full overflow-hidden rounded border border-outline-variant/30 bg-surface-container-highest transition-colors md:h-[340px]",
+        project.repoUrl && "hover:border-primary/50"
+      )}
     >
-      <div
-        className={cn(
-          "group relative size-full overflow-hidden rounded border border-outline-variant/30 bg-surface-container-highest transition-colors",
-          project.repoUrl && "hover:border-primary/50"
-        )}
-      >
-        {project.image ? (
-          <img
-            src={project.image}
-            alt={project.imageAlt}
-            className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex size-full items-center justify-center">
-            <span className="font-label-mono text-label-mono uppercase tracking-widest text-on-surface-variant transition-colors group-hover:text-primary">
-              {project.title}
-            </span>
-          </div>
-        )}
-      </div>
-    </LockedContent>
+      <img
+        src={project.image}
+        alt={project.imageAlt}
+        className="size-full object-cover transition-transform duration-700 ease-out group-hover:scale-105"
+      />
+    </div>
   )
 
   if (project.repoUrl && !isWip) {
@@ -103,33 +89,29 @@ export function ProjectsGrid() {
         const reversed = index % 2 === 1
 
         return (
-          <article
-            key={project.slug}
-            className="grid grid-cols-1 items-center gap-gutter md:grid-cols-12"
-          >
-            <div className={cn("md:col-span-7", reversed && "md:order-2")}>
-              <ProjectTile project={project} />
-            </div>
-            <div
-              className={cn(
-                "flex flex-col gap-3 md:col-span-5",
-                reversed ? "md:order-1 md:pr-gutter" : "md:pl-gutter"
-              )}
-            >
-              <h2 className="font-headline-md text-headline-md text-on-surface">
-                {project.title}
-              </h2>
-              <LockedContent
-                locked={project.status === "wip"}
-                compact
-                className="rounded"
-              >
-                <p className="font-body-md text-body-md text-on-surface-variant">
-                  {project.description}
-                </p>
-              </LockedContent>
-              <ProjectMeta project={project} />
-            </div>
+          <article key={project.slug} className="flex flex-col gap-gutter">
+            <h2 className="font-headline-md text-headline-md text-on-surface">
+              {project.title}
+            </h2>
+
+            <LockedContent locked={project.status === "wip"} className="rounded-md">
+              <div className="grid grid-cols-1 items-center gap-gutter md:grid-cols-12">
+                <div className={cn("md:col-span-7", reversed && "md:order-2")}>
+                  <ProjectTile project={project} />
+                </div>
+                <div
+                  className={cn(
+                    "flex flex-col gap-3 md:col-span-5",
+                    reversed ? "md:order-1 md:pr-gutter" : "md:pl-gutter"
+                  )}
+                >
+                  <p className="font-body-md text-body-md text-on-surface-variant">
+                    {project.description}
+                  </p>
+                  <ProjectMeta project={project} />
+                </div>
+              </div>
+            </LockedContent>
           </article>
         )
       })}

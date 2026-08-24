@@ -50,11 +50,12 @@ export function GalleryGrid() {
             return (
               <motion.article
                 key={photo.id}
+                id={`photo-${photo.id}`}
                 initial={reduceMotion ? false : { opacity: 0, y: 50 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: "-100px" }}
                 transition={{ duration: 0.8, ease: revealEase }}
-                className="flex flex-col gap-gutter"
+                className="flex scroll-mt-24 flex-col gap-gutter"
               >
                 <MonolithImage photo={photo} onOpen={() => setActive(photo)} />
                 <div className="flex flex-col items-start justify-between gap-6 md:flex-row md:items-end">
@@ -87,11 +88,12 @@ export function GalleryGrid() {
           return (
             <motion.article
               key={photo.id}
+              id={`photo-${photo.id}`}
               initial={reduceMotion ? false : { opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, margin: "-100px" }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: revealEase }}
-              className="grid grid-cols-1 items-center gap-gutter md:grid-cols-12"
+              className="grid scroll-mt-24 grid-cols-1 items-center gap-gutter md:grid-cols-12"
             >
               <div className={cn("md:col-span-8", reversed && "md:order-2")}>
                 <MonolithImage photo={photo} onOpen={() => setActive(photo)} />
