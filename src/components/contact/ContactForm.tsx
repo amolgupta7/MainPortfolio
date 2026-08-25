@@ -7,10 +7,6 @@ import { Button } from "@/components/ui/button";
 const inputClass =
   "w-full rounded-xs border border-outline-variant/30 bg-surface-container-highest/40 px-4 py-3 font-body-md text-body-md text-on-surface transition-colors placeholder:text-outline focus:border-primary focus:bg-surface-container-highest/60 focus:outline-none focus:ring-1 focus:ring-primary";
 
-// Web3Forms sends the submission straight to the inbox tied to this access
-// key — no backend of our own needed. Get a free key at web3forms.com (it's
-// meant to be public/client-exposed, same idea as a reCAPTCHA site key) and
-// set it as VITE_WEB3FORMS_ACCESS_KEY (see README).
 const WEB3FORMS_ACCESS_KEY = import.meta.env.VITE_WEB3FORMS_ACCESS_KEY as
   | string
   | undefined;
@@ -21,8 +17,6 @@ export function ContactForm() {
   >("idle");
   const [time, setTime] = useState(5);
 
-  // Keep the countdown and form reset tied to the success state so both
-  // timers are cleaned up if the component unmounts.
   useEffect(() => {
     if (status !== "sent") return;
 
@@ -57,9 +51,6 @@ export function ContactForm() {
     const form = event.currentTarget;
     const data = new FormData(form);
     data.append("access_key", WEB3FORMS_ACCESS_KEY);
-    if (!data.get("subject")) {
-      data.set("subject", `Portfolio contact from ${data.get("name")}`);
-    }
 
     try {
       const response = await fetch("https://api.web3forms.com/submit", {

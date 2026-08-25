@@ -1,35 +1,30 @@
-import { Icon } from "@iconify/react"
-import arrowLeftIcon from "@iconify-icons/ph/arrow-left-fill"
-import { Link, Navigate, useParams } from "react-router-dom"
+import arrowLeftIcon from "@iconify-icons/ph/arrow-left-fill";
+import { Icon } from "@iconify/react";
+import { Link, Navigate, useParams } from "react-router-dom";
 
-import { Footer } from "@/components/layout/Footer"
-import { BlueprintHero } from "@/components/blueprint/BlueprintHero"
-import { DecisionsList } from "@/components/blueprint/DecisionsList"
-import { ProblemGrid } from "@/components/blueprint/ProblemGrid"
-import { ResultsGrid } from "@/components/blueprint/ResultsGrid"
-import { Section } from "@/components/blueprint/Section"
-import { TableOfContents } from "@/components/blueprint/TableOfContents"
-import { LockedContent } from "@/components/ui/LockedContent"
-import { blueprints } from "@/data/blueprint"
-import { projects } from "@/data/projects"
+import { BlueprintHero } from "@/components/blueprint/BlueprintHero";
+import { DecisionsList } from "@/components/blueprint/DecisionsList";
+import { ProblemGrid } from "@/components/blueprint/ProblemGrid";
+import { ResultsGrid } from "@/components/blueprint/ResultsGrid";
+import { Section } from "@/components/blueprint/Section";
+import { TableOfContents } from "@/components/blueprint/TableOfContents";
+import { Footer } from "@/components/layout/Footer";
+import { LockedContent } from "@/components/ui/LockedContent";
+import { blueprints } from "@/data/blueprint";
+import { projects } from "@/data/projects";
 
 export default function Blueprint() {
-  const { slug } = useParams()
-  const project = projects.find((item) => item.slug === slug)
+  const { slug } = useParams();
+  const project = projects.find((item) => item.slug === slug);
 
   if (!project) {
-    return <Navigate to="/projects" replace />
+    return <Navigate to="/projects" replace />;
   }
 
-  // WIP projects have no blueprint entry at all — there's no real case
-  // study to show yet, so `data` is undefined and the page below renders a
-  // title-only locked placeholder instead.
-  const data = blueprints[project.slug]
+  const data = blueprints[project.slug];
 
-  // Cycle to whichever project comes next in the list, wrapping back to the
-  // start — a real link instead of a placeholder "next project" name.
-  const currentIndex = projects.findIndex((item) => item.slug === slug)
-  const nextProject = projects[(currentIndex + 1) % projects.length]
+  const currentIndex = projects.findIndex((item) => item.slug === slug);
+  const nextProject = projects[(currentIndex + 1) % projects.length];
 
   return (
     <div className="flex min-h-screen flex-col bg-technical-grid">
@@ -128,5 +123,5 @@ export default function Blueprint() {
       </div>
       <Footer />
     </div>
-  )
+  );
 }

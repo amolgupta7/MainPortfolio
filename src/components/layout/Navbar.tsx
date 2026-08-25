@@ -1,12 +1,12 @@
-import { useState } from "react"
-import { Link, NavLink, useLocation } from "react-router-dom"
-import { Icon } from "@iconify/react"
-import menuIcon from "@iconify-icons/ph/list-fill"
+import menuIcon from "@iconify-icons/ph/list-fill";
+import { Icon } from "@iconify/react";
+import { useState } from "react";
+import { Link, NavLink, useLocation } from "react-router-dom";
 
-import { Button } from "@/components/ui/button"
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import { homeNavLinks, pageNavLinks, site } from "@/data/site"
-import { cn, preferredScrollBehavior } from "@/lib/utils"
+import { Button } from "@/components/ui/button";
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { homeNavLinks, pageNavLinks, site } from "@/data/site";
+import { cn, preferredScrollBehavior } from "@/lib/utils";
 
 function SectionLink({
   hash,
@@ -14,41 +14,37 @@ function SectionLink({
   onNavigate,
   className,
 }: {
-  hash: string
-  label: string
-  onNavigate?: () => void
-  className?: string
+  hash: string;
+  label: string;
+  onNavigate?: () => void;
+  className?: string;
 }) {
-  const location = useLocation()
+  const location = useLocation();
 
   const handleClick = (event: React.MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === "/") {
-      event.preventDefault()
+      event.preventDefault();
       document
         .getElementById(hash)
-        ?.scrollIntoView({ behavior: preferredScrollBehavior() })
-      window.history.pushState(null, "", `#${hash}`)
+        ?.scrollIntoView({ behavior: preferredScrollBehavior() });
+      window.history.pushState(null, "", `#${hash}`);
     }
-    onNavigate?.()
-  }
+    onNavigate?.();
+  };
 
   return (
     <Link to={`/#${hash}`} onClick={handleClick} className={className}>
       {label}
     </Link>
-  )
+  );
 }
 
 export function Navbar() {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(false);
 
-  // Deliberately inverted relative to the page: bg-inverse-surface/text-
-  // inverse-on-surface always contrast against whichever theme is active
-  // (see the inverse-* tokens in index.css), so the bar reads as a distinct
-  // band regardless of dark/light mode.
   const desktopLinkClass =
-    "font-label-mono text-label-mono text-inverse-on-surface transition-colors duration-300 hover:text-inverse-primary"
-  const activeLinkClass = "text-inverse-primary"
+    "font-label-mono text-label-mono text-inverse-on-surface transition-colors duration-300 hover:text-inverse-primary";
+  const activeLinkClass = "text-inverse-primary";
 
   return (
     <header className="sticky top-0 z-50 border-b border-inverse-on-surface/15 bg-inverse-surface">
@@ -60,7 +56,10 @@ export function Navbar() {
           {site.wordmark}
         </Link>
 
-        <nav className="hidden items-center gap-gutter md:flex" aria-label="Primary">
+        <nav
+          className="hidden items-center gap-gutter md:flex"
+          aria-label="Primary"
+        >
           {homeNavLinks.map((link) => (
             <SectionLink
               key={link.hash}
@@ -137,5 +136,5 @@ export function Navbar() {
         </DialogContent>
       </Dialog>
     </header>
-  )
+  );
 }

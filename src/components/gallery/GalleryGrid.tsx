@@ -1,20 +1,20 @@
-import { useState } from "react"
-import { motion, useReducedMotion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion";
+import { useState } from "react";
 
-import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog"
-import { photos, type PhotoItem } from "@/data/photography"
-import { cn } from "@/lib/utils"
+import { Dialog, DialogContent, DialogTitle } from "@/components/ui/dialog";
+import { photos, type PhotoItem } from "@/data/photography";
+import { cn } from "@/lib/utils";
 
-/** Large-format, alternating photo/text layout ported from the "Photography
- * Gallery - Monolith Grid" Stitch screen. Photos show at full color/opacity
- * always, with a subtle scale/saturation lift on hover.
- *
- * Each tile's aspect-ratio is set to the photo's own real width/height
- * (see photography.ts) rather than a fixed pixel height, so nothing gets
- * cropped or stretched out of its original proportions. */
-const revealEase = [0.16, 1, 0.3, 1] as const
+/** Alternating gallery layout that preserves each photo's source ratio. */
+const revealEase = [0.16, 1, 0.3, 1] as const;
 
-function MonolithImage({ photo, onOpen }: { photo: PhotoItem; onOpen: () => void }) {
+function MonolithImage({
+  photo,
+  onOpen,
+}: {
+  photo: PhotoItem;
+  onOpen: () => void;
+}) {
   return (
     <div
       style={{ aspectRatio: `${photo.width} / ${photo.height}` }}
@@ -34,13 +34,13 @@ function MonolithImage({ photo, onOpen }: { photo: PhotoItem; onOpen: () => void
         />
       </button>
     </div>
-  )
+  );
 }
 
 export function GalleryGrid() {
-  const [active, setActive] = useState<PhotoItem | null>(null)
-  const reduceMotion = useReducedMotion()
-  let sideIndex = 0
+  const [active, setActive] = useState<PhotoItem | null>(null);
+  const reduceMotion = useReducedMotion();
+  let sideIndex = 0;
 
   return (
     <>
@@ -79,11 +79,11 @@ export function GalleryGrid() {
                   </div>
                 </div>
               </motion.article>
-            )
+            );
           }
 
-          const reversed = sideIndex % 2 === 1
-          sideIndex++
+          const reversed = sideIndex % 2 === 1;
+          sideIndex++;
 
           return (
             <motion.article
@@ -101,7 +101,7 @@ export function GalleryGrid() {
               <div
                 className={cn(
                   "flex flex-col gap-4 md:col-span-4",
-                  reversed ? "md:order-1 md:pr-gutter" : "md:pl-gutter"
+                  reversed ? "md:order-1 md:pr-gutter" : "md:pl-gutter",
                 )}
               >
                 <h2 className="font-headline-md text-headline-md text-on-surface">
@@ -113,7 +113,9 @@ export function GalleryGrid() {
                 <div
                   className={cn(
                     "mt-4 flex flex-col gap-2 border-outline-variant/50 py-2 font-label-mono text-label-mono text-primary",
-                    reversed ? "border-r-2 pr-4 text-right md:text-left" : "border-l-2 pl-4"
+                    reversed
+                      ? "border-r-2 pr-4 text-right md:text-left"
+                      : "border-l-2 pl-4",
                   )}
                 >
                   <span>{photo.caption}</span>
@@ -121,11 +123,14 @@ export function GalleryGrid() {
                 </div>
               </div>
             </motion.article>
-          )
+          );
         })}
       </div>
 
-      <Dialog open={active !== null} onOpenChange={(open) => !open && setActive(null)}>
+      <Dialog
+        open={active !== null}
+        onOpenChange={(open) => !open && setActive(null)}
+      >
         <DialogContent className="p-4 duration-300 ease-[cubic-bezier(0.25,1,0.5,1)] data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95">
           <DialogTitle className="sr-only">
             {active?.title ?? "Photo preview"}
@@ -145,5 +150,5 @@ export function GalleryGrid() {
         </DialogContent>
       </Dialog>
     </>
-  )
+  );
 }

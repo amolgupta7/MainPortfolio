@@ -1,37 +1,33 @@
-import photo01 from "@/assets/photography/01.jpg"
-import photo02 from "@/assets/photography/02.jpg"
-import photo03 from "@/assets/photography/03.jpg"
-import photo04 from "@/assets/photography/04.jpg"
-import photo05 from "@/assets/photography/05.jpg"
-import photo06 from "@/assets/photography/06.jpg"
-import photo07 from "@/assets/photography/07.jpg"
-import photo08 from "@/assets/photography/08.jpg"
-import photo09 from "@/assets/photography/09.jpg"
-import photo10 from "@/assets/photography/10.jpg"
-import photo11 from "@/assets/photography/11.jpg"
-import photo12 from "@/assets/photography/12.jpg"
-import photo13 from "@/assets/photography/13.jpg"
-import photo14 from "@/assets/photography/14.jpg"
-import photo15 from "@/assets/photography/15.jpg"
-import photo16 from "@/assets/photography/16.jpg"
+import photo01 from "@/assets/photography/01.jpg";
+import photo02 from "@/assets/photography/02.jpg";
+import photo03 from "@/assets/photography/03.jpg";
+import photo04 from "@/assets/photography/04.jpg";
+import photo05 from "@/assets/photography/05.jpg";
+import photo06 from "@/assets/photography/06.jpg";
+import photo07 from "@/assets/photography/07.jpg";
+import photo08 from "@/assets/photography/08.jpg";
+import photo09 from "@/assets/photography/09.jpg";
+import photo10 from "@/assets/photography/10.jpg";
+import photo11 from "@/assets/photography/11.jpg";
+import photo12 from "@/assets/photography/12.jpg";
+import photo13 from "@/assets/photography/13.jpg";
+import photo14 from "@/assets/photography/14.jpg";
+import photo15 from "@/assets/photography/15.jpg";
+import photo16 from "@/assets/photography/16.jpg";
 
 export interface PhotoItem {
-  id: number
-  caption: string
-  title: string
-  description: string
-  /** Whether the source frame was actually shot in black-and-white or color
-   * — real, not decorative — shown as a small technical readout alongside
-  * each photo instead of fabricated camera EXIF we don't have. */
-  originalFormat: "B&W" | "Color"
-  featured?: boolean
-  image: string
-  imageAlt: string
-  /** Real pixel dimensions of the source file — used to size each gallery
-   * tile to the photo's actual aspect ratio instead of cropping it into a
-   * fixed box. */
-  width: number
-  height: number
+  id: number;
+  caption: string;
+  title: string;
+  description: string;
+  /** Source frame format shown in the gallery metadata. */
+  originalFormat: "B&W" | "Color";
+  featured?: boolean;
+  image: string;
+  imageAlt: string;
+  /** Source dimensions used to preserve each photo's aspect ratio. */
+  width: number;
+  height: number;
 }
 
 const photoData: PhotoItem[] = [
@@ -244,6 +240,6 @@ const photoData: PhotoItem[] = [
     width: 2400,
     height: 1600,
   },
-]
+];
 
-export const photos: PhotoItem[] = photoData.toSorted((a, b) => a.id - b.id)
+export const photos: PhotoItem[] = photoData.toSorted((a, b) => a.id - b.id);
