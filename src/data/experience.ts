@@ -46,6 +46,6 @@ export const aboutStats = [
   { label: "Role", value: "Senior Software Engineer" },
   { label: "Experience", value: "4+ Years" },
   { label: "Location", value: "Bengaluru, India" },
-  { label: "Specialization", value: "Java/Springboot, React/TypeScript" },
+  { label: "Specialization", value: "Java/React" },
   { label: "Availability", value: "Open", highlight: true },
 ]
