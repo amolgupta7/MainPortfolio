@@ -12,7 +12,7 @@ export const experience: ExperienceItem[] = [
     role: "Senior Software Engineer",
     company: "Visa Inc. · Bengaluru, India",
     description:
-      "Led frontend development of the Virtual Terminal and API Keys modules for Visa's Authorize.Net international merchant portal (APEX), built on React 19, TypeScript, and Vite in a large-scale Nx monorepo. Owned ~30% of the codebase across three concurrent product squads, drove 50% business growth, and improved rendering performance by 55%.",
+      "Leading design and development of backend services for merchant-facing payment products using Java, Spring Boot, and Vert.x. Designing and implementing RESTful payment and transaction search APIs within existing microservices, with a focus on correctness, performance, and backward compatibility, and building internal platform tooling including a feature-toggle service and client library used across teams. On the frontend, leading development of merchant-facing features such as payment processing interfaces, API key management using React, TypeScript, Redux Toolkit, and TanStack Query, with testing standards driven by Vitest, Playwright, MSW, and Storybook. Owning gateway and microservice integrations, conducting code reviews, and mentoring engineers across the stack.",
     current: true,
   },
   {
@@ -20,7 +20,7 @@ export const experience: ExperienceItem[] = [
     role: "Software Engineer",
     company: "Visa Inc. · Bengaluru, India",
     description:
-      "Built a secure, responsive payment product (Authorize.Net) in React and JavaScript for accepting credit card, eCheck, and other payment methods. Shipped notification and OTP authentication services, plus Merchant ID and Terminal ID management services with Java, Spring Boot, JPA/Hibernate, and MySQL.",
+      "Developed and maintained backend microservices for payment products using Java, Spring Boot, JPA/Hibernate, and MySQL, building merchant and terminal management services with well-designed data models, data access layers, and REST APIs. Integrated services with payment gateways and internal systems, backed by unit and integration tests for reliability. On the frontend, built reusable React and TypeScript components, integrated UIs with backend APIs, and wrote unit and end-to-end tests using Jest and Playwright. Collaborated with cross-functional teams in an agile setup to deliver features end to end.",
   },
 ]
 
@@ -46,6 +46,6 @@ export const aboutStats = [
   { label: "Role", value: "Senior Software Engineer" },
   { label: "Experience", value: "4+ Years" },
   { label: "Location", value: "Bengaluru, India" },
-  { label: "Specialization", value: "React/TypeScript" },
+  { label: "Specialization", value: "Java/Springboot, React/TypeScript" },
   { label: "Availability", value: "Open", highlight: true },
 ]

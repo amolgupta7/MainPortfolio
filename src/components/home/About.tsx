@@ -1,15 +1,15 @@
-import { motion, useReducedMotion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion";
 
-import { aboutStats } from "@/data/experience"
+import { aboutStats } from "@/data/experience";
 
 const paragraphs = [
-  "I'm a Senior Software Engineer with 4+ years architecting scalable, high-performance frontend systems for fintech and payments platforms at Visa Inc. My expertise centers on React, TypeScript, and modern frontend architecture, with working knowledge of Java/Spring Boot backend services that gives me a holistic view of the systems I build for.",
-  "Currently, I lead frontend development for Visa's global merchant portal, working with React 19, and shared component libraries within a large-scale Nx monorepo.",
-  "When I'm not writing code, I'm usually behind a camera, applying the same principles of composition and technical precision to my photography.",
-]
+  "I'm a Senior Software Engineer with 4+ years building scalable, high-performance systems for fintech and payments platforms at Visa Inc. I work across the stack, designing reliable services and APIs with Java and Spring Boot and crafting polished interfaces with React and TypeScript, which lets me own features end to end.",
+  "Currently, I lead development for Visa's global merchant portal, working with React 19, TypeScript, and shared component libraries inside a large-scale Nx monorepo, alongside the backend services that power it, with a focus on performance, reusability, and long-term maintainability.",
+  "When I'm not writing code, I'm usually behind a camera — photography asks the same questions engineering does: what matters, what stays out, and where the eye should go.",
+];
 
 export function About() {
-  const reduceMotion = useReducedMotion()
+  const reduceMotion = useReducedMotion();
 
   return (
     <section
@@ -17,7 +17,9 @@ export function About() {
       className="relative mx-auto max-w-container-max border-t border-outline-variant/20 px-margin-mobile py-16 md:px-margin-desktop md:py-section-gap"
     >
       <h2 className="mb-12 flex items-center gap-4 font-headline-sm text-headline-sm text-on-surface">
-        <span className="font-label-mono text-label-mono text-primary">01.</span>{" "}
+        <span className="font-label-mono text-label-mono text-primary">
+          01.
+        </span>{" "}
         About Me
       </h2>
 
@@ -68,5 +70,5 @@ export function About() {
         </motion.div>
       </div>
     </section>
-  )
+  );
 }

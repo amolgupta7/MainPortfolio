@@ -34,11 +34,7 @@ export function Hero() {
           </h1>
 
           <p className="mb-10 max-w-2xl font-body-lg text-body-lg text-on-surface-variant">
-            With 4+ years architecting scalable, high-performance frontend
-            systems for fintech and payments platforms at Visa. I bridge the gap
-            between complex technical requirements and elegant, accessible user
-            experiences using React, TypeScript, and modern frontend
-            architecture.
+           With 4+ years building full-stack systems for fintech and payments platforms at Visa, I work across the stack, designing reliable APIs with Java and Spring Boot and crafting elegant, accessible interfaces with React and TypeScript. Outside of code, I shoot photographs, which has quietly made me a better engineer. Framing a shot and designing a system ask the same questions: what matters, what stays out, and where the eye should go.
           </p>
 
           {/* Mobile-only: same photo as the desktop side column, but placed
